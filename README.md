@@ -1,1 +1,1 @@
-Branch này intentionally rỗng.
+Nơi Ngân chỉnh frontend của Ngân
