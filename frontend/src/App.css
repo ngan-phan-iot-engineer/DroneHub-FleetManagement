@@ -1,0 +1,12 @@
+/* 
+  Main App Shell Styles
+  Transition animations are handled by inline CSS and Framer Motion in App.jsx.
+*/
+
+.app-shell {
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+  position: relative;
+  background-color: #f7f9f8;
+}

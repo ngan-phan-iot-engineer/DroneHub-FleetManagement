@@ -1,0 +1,194 @@
+.mission-editor-panel {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 16px;
+  background: #ffffff;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  max-height: 400px;
+  overflow: hidden;
+}
+
+.mission-editor-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 4px;
+}
+
+.mission-editor-header h3 {
+  margin: 0;
+  font-size: 16px;
+  font-weight: 600;
+  color: #0f172a;
+}
+
+.mission-editor-count {
+  display: inline-block;
+  padding: 2px 8px;
+  background: #e0e7ff;
+  color: #4f46e5;
+  border-radius: 12px;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.mission-editor-toolbar {
+  display: flex;
+  gap: 8px;
+}
+
+.mission-editor-empty {
+  text-align: center;
+  color: #64748b;
+  font-size: 13px;
+  padding: 12px 0;
+  margin: 0;
+}
+
+.mission-editor-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  max-height: 250px;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.mission-editor-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 8px 10px;
+  background: #f8fafc;
+  border: 1px solid #e2e8f0;
+  border-radius: 6px;
+  cursor: grab;
+  transition: all 0.2s;
+}
+
+.mission-editor-item:hover {
+  background: #f1f5f9;
+  border-color: #cbd5e1;
+}
+
+.mission-editor-item.is-editing {
+  background: #dbeafe;
+  border-color: #0284c7;
+}
+
+.mission-editor-item-content {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex: 1;
+}
+
+.mission-editor-item-number {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+  background: #4f46e5;
+  color: #ffffff;
+  border-radius: 50%;
+  font-size: 12px;
+  font-weight: 600;
+  flex-shrink: 0;
+}
+
+.mission-editor-item-details {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  flex: 1;
+}
+
+.mission-editor-coord {
+  font-size: 12px;
+  color: #475569;
+  margin: 0;
+  font-family: monospace;
+}
+
+.mission-editor-altitude {
+  width: 70px;
+  padding: 4px 6px;
+  font-size: 12px;
+  border: 1px solid #cbd5e1;
+  border-radius: 4px;
+  color: #0f172a;
+}
+
+.mission-editor-altitude:focus {
+  outline: none;
+  border-color: #4f46e5;
+  background: #f0f4ff;
+}
+
+.mission-editor-delete {
+  background: #fee2e2;
+  color: #dc2626;
+  border: none;
+  width: 24px;
+  height: 24px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s;
+}
+
+.mission-editor-delete:hover {
+  background: #fca5a5;
+  color: #991b1b;
+}
+
+.mission-editor-actions {
+  display: flex;
+  gap: 8px;
+}
+
+.btn {
+  padding: 8px 12px;
+  border: none;
+  border-radius: 4px;
+  font-size: 13px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.btn-primary {
+  background: #4f46e5;
+  color: #ffffff;
+}
+
+.btn-primary:hover {
+  background: #4339ca;
+}
+
+.btn-secondary {
+  background: #e2e8f0;
+  color: #0f172a;
+}
+
+.btn-secondary:hover {
+  background: #cbd5e1;
+}
+
+.btn-sm {
+  padding: 6px 10px;
+  font-size: 12px;
+}
+
+.btn-block {
+  width: 100%;
+}

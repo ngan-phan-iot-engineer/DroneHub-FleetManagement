@@ -1,0 +1,140 @@
+.restricted-zone-panel {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 16px;
+  background: #ffffff;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  max-height: 400px;
+  overflow: hidden;
+}
+
+.restricted-zone-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 4px;
+}
+
+.restricted-zone-header h3 {
+  margin: 0;
+  font-size: 16px;
+  font-weight: 600;
+  color: #0f172a;
+}
+
+.restricted-zone-count {
+  display: inline-block;
+  padding: 2px 8px;
+  background: #fee2e2;
+  color: #991b1b;
+  border-radius: 12px;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.restricted-zone-input {
+  display: flex;
+  gap: 8px;
+}
+
+.restricted-zone-input-field {
+  flex: 1;
+  padding: 8px 10px;
+  border: 1px solid #e2e8f0;
+  border-radius: 4px;
+  font-size: 13px;
+  color: #0f172a;
+}
+
+.restricted-zone-input-field:focus {
+  outline: none;
+  border-color: #dc2626;
+  background: #fef2f2;
+}
+
+.restricted-zone-empty {
+  text-align: center;
+  color: #64748b;
+  font-size: 13px;
+  padding: 12px 0;
+  margin: 0;
+}
+
+.restricted-zone-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  max-height: 250px;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.restricted-zone-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 8px 10px;
+  background: #fef2f2;
+  border: 1px solid #fecaca;
+  border-radius: 6px;
+  transition: all 0.2s;
+}
+
+.restricted-zone-item:hover {
+  background: #fee2e2;
+  border-color: #fca5a5;
+}
+
+.restricted-zone-item.is-disabled {
+  opacity: 0.6;
+  background: #f8fafc;
+  border-color: #cbd5e1;
+}
+
+.restricted-zone-item-content {
+  flex: 1;
+}
+
+.restricted-zone-toggle {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+}
+
+.restricted-zone-toggle input {
+  width: 16px;
+  height: 16px;
+  cursor: pointer;
+}
+
+.restricted-zone-name {
+  font-size: 13px;
+  font-weight: 500;
+  color: #0f172a;
+}
+
+.restricted-zone-delete {
+  background: #fee2e2;
+  color: #dc2626;
+  border: none;
+  width: 24px;
+  height: 24px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s;
+}
+
+.restricted-zone-delete:hover {
+  background: #fca5a5;
+  color: #991b1b;
+}

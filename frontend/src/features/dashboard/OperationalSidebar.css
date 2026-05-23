@@ -1,0 +1,69 @@
+.operational-sidebar {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  max-width: 380px;
+  height: 100%;
+  background: #f8fafc;
+  border-left: 1px solid #e2e8f0;
+  overflow: hidden;
+}
+
+.operational-tabs {
+  display: flex;
+  gap: 0;
+  padding: 0;
+  background: #ffffff;
+  border-bottom: 1px solid #e2e8f0;
+  flex-shrink: 0;
+}
+
+.operational-tab {
+  flex: 1;
+  padding: 12px 16px;
+  border: none;
+  background: transparent;
+  color: #64748b;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
+  border-bottom: 2px solid transparent;
+}
+
+.operational-tab:hover {
+  color: #0f172a;
+  background: #f1f5f9;
+}
+
+.operational-tab.is-active {
+  color: #4f46e5;
+  border-bottom-color: #4f46e5;
+  background: #f0f4ff;
+}
+
+.operational-content {
+  flex: 1;
+  overflow-y: auto;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Scrollbar styling */
+.operational-content::-webkit-scrollbar {
+  width: 6px;
+}
+
+.operational-content::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.operational-content::-webkit-scrollbar-thumb {
+  background: #cbd5e1;
+  border-radius: 3px;
+}
+
+.operational-content::-webkit-scrollbar-thumb:hover {
+  background: #94a3b8;
+}

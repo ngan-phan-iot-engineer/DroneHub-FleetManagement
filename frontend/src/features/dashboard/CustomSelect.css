@@ -1,0 +1,62 @@
+/* === TRIGGER (Nút hiển thị giá trị hiện tại) === */
+.custom-select-trigger {
+	cursor: pointer;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	user-select: none;
+}
+
+/* Mũi tên tam giác - xoay khi mở giống sidebar */
+.custom-select-arrow {
+	font-size: 10px;
+	color: #64786a;
+	transition: transform 0.25s ease;
+	margin-left: 8px;
+	flex-shrink: 0;
+}
+
+.custom-select-arrow.expanded {
+	transform: rotate(180deg);
+}
+
+/* === DROPDOWN POPUP === */
+.custom-select-dropdown {
+	position: fixed;
+	background: #F0F4F1; /* Nền xám xanh nhạt hài hòa với dashboard */
+	border-radius: 8px;
+	box-shadow: 0 6px 20px rgba(0, 0, 0, 0.13);
+	z-index: 999;
+	overflow: hidden;
+	border: 1px solid #c8d5cc;
+}
+
+/* === OPTION ITEMS === */
+.custom-select-option {
+	padding: 10px 16px;
+	font-size: 14px;
+	color: #4a5e53;
+	cursor: pointer;
+	transition: background 0.15s ease, color 0.15s ease;
+	border-bottom: 1px solid #e0e8e3;
+}
+
+.custom-select-option:last-child {
+	border-bottom: none;
+}
+
+.custom-select-option:hover {
+	background: #dce6e0;
+	color: #3a5040;
+}
+
+/* Item đang được chọn - màu xanh lá đậm của dashboard */
+.custom-select-option.selected {
+	background: #64786a;
+	color: #ffffff;
+	font-weight: 500;
+}
+
+.custom-select-option.selected:hover {
+	background: #567160;
+}

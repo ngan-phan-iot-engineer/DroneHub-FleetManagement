@@ -1,0 +1,310 @@
+/**
+ * TelemetryPanel.css - Real-time Drone Telemetry Display Styles
+ * 
+ * Consistent with existing DJI FlightHub 2-inspired theme
+ */
+
+.telemetry-panel {
+  display: flex;
+  flex-direction: column;
+  background: linear-gradient(180deg, #f8f9fa 0%, #f0f1f3 100%);
+  border-left: 1px solid #d0d5dd;
+  max-height: 100%;
+  overflow-y: auto;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+}
+
+.telemetry-panel--empty {
+  align-items: center;
+  justify-content: center;
+  min-height: 300px;
+}
+
+.telemetry-panel-empty-text {
+  color: #9ca3af;
+  font-size: 14px;
+  text-align: center;
+  margin: 0;
+}
+
+.telemetry-panel-content {
+  display: flex;
+  flex-direction: column;
+  padding: 16px;
+  gap: 12px;
+}
+
+/* Header: Drone Identity */
+.telemetry-header {
+  display: flex;
+  flex-direction: column;
+  padding: 12px;
+  background: white;
+  border-radius: 6px;
+  border: 1px solid #e5e7eb;
+  gap: 8px;
+}
+
+.telemetry-drone-code {
+  margin: 0;
+  font-size: 18px;
+  font-weight: 700;
+  color: #1f2937;
+  letter-spacing: 0.5px;
+}
+
+.telemetry-pilot-team {
+  display: flex;
+  justify-content: space-between;
+  font-size: 12px;
+}
+
+.telemetry-label {
+  color: #6b7280;
+  font-weight: 500;
+}
+
+.telemetry-value {
+  color: #1f2937;
+  font-weight: 600;
+}
+
+.telemetry-status-badge {
+  margin-top: 4px;
+  display: flex;
+  gap: 4px;
+  flex-wrap: wrap;
+}
+
+.badge-pill {
+  display: inline-block;
+  padding: 4px 8px;
+  border-radius: 12px;
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.badge-flying {
+  background-color: #dcfce7;
+  color: #166534;
+}
+
+.badge-rtl {
+  background-color: #fef08a;
+  color: #854d0e;
+}
+
+.badge-landing {
+  background-color: #fee2e2;
+  color: #7f1d1d;
+}
+
+.badge-idle {
+  background-color: #e0e7ff;
+  color: #3730a3;
+}
+
+/* Section Styling */
+.telemetry-section {
+  display: flex;
+  flex-direction: column;
+  padding: 12px;
+  background: white;
+  border-radius: 6px;
+  border: 1px solid #e5e7eb;
+  gap: 8px;
+}
+
+.telemetry-section-title {
+  font-size: 12px;
+  font-weight: 700;
+  color: #6b7280;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin-bottom: 4px;
+  padding-bottom: 4px;
+  border-bottom: 1px solid #f3f4f6;
+}
+
+/* Mission Section */
+.telemetry-mission {
+  border-left: 3px solid #3b82f6;
+}
+
+.telemetry-field {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 13px;
+  padding: 4px 0;
+  gap: 12px;
+}
+
+/* Critical Metrics */
+.telemetry-critical {
+  border-left: 3px solid #ef4444;
+}
+
+.telemetry-metric {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding: 8px;
+  background: #fafafa;
+  border-radius: 4px;
+  border-left: 3px solid #cbd5e1;
+}
+
+.telemetry-metric--excellent {
+  border-left-color: #10b981;
+  background-color: #f0fdf4;
+}
+
+.telemetry-metric--good {
+  border-left-color: #3b82f6;
+  background-color: #f0f9ff;
+}
+
+.telemetry-metric--warning {
+  border-left-color: #f59e0b;
+  background-color: #fffbeb;
+}
+
+.telemetry-metric--critical {
+  border-left-color: #ef4444;
+  background-color: #fef2f2;
+}
+
+.metric-label {
+  font-size: 11px;
+  font-weight: 600;
+  color: #6b7280;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.metric-value {
+  font-size: 16px;
+  font-weight: 700;
+  color: #1f2937;
+}
+
+.metric-bar {
+  height: 6px;
+  background-color: #e5e7eb;
+  border-radius: 3px;
+  overflow: hidden;
+}
+
+.metric-bar-fill {
+  height: 100%;
+  background: linear-gradient(90deg, #3b82f6, #2563eb);
+  border-radius: 3px;
+  transition: width 0.3s ease;
+}
+
+.metric-bar-excellent {
+  background: linear-gradient(90deg, #10b981, #059669);
+}
+
+.metric-bar-good {
+  background: linear-gradient(90deg, #3b82f6, #2563eb);
+}
+
+.metric-bar-warning {
+  background: linear-gradient(90deg, #f59e0b, #d97706);
+}
+
+.metric-bar-critical {
+  background: linear-gradient(90deg, #ef4444, #dc2626);
+  animation: pulse-warning 2s infinite;
+}
+
+@keyframes pulse-warning {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.7;
+  }
+}
+
+/* Flight Telemetry Grid */
+.telemetry-flight {
+  border-left: 3px solid #06b6d4;
+}
+
+.telemetry-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+}
+
+.telemetry-grid .telemetry-field {
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 8px;
+  background: #fafafa;
+  border-radius: 4px;
+  border-left: 2px solid #e5e7eb;
+}
+
+.telemetry-grid .telemetry-field:hover {
+  background-color: #f3f4f6;
+}
+
+/* Additional Info */
+.telemetry-additional {
+  border-left: 3px solid #8b5cf6;
+}
+
+.telemetry-value.recording {
+  color: #dc2626;
+  font-weight: 700;
+  animation: blink 1s infinite;
+}
+
+@keyframes blink {
+  0%, 50%, 100% {
+    opacity: 1;
+  }
+  25%, 75% {
+    opacity: 0.5;
+  }
+}
+
+/* Footer: Timestamp */
+.telemetry-footer {
+  display: flex;
+  justify-content: flex-end;
+  padding: 8px;
+  border-top: 1px solid #e5e7eb;
+  font-size: 11px;
+  color: #9ca3af;
+}
+
+/* Responsive: Mobile */
+@media (max-width: 768px) {
+  .telemetry-panel-content {
+    padding: 12px;
+    gap: 10px;
+  }
+
+  .telemetry-section {
+    padding: 10px;
+  }
+
+  .telemetry-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .telemetry-drone-code {
+    font-size: 16px;
+  }
+
+  .metric-value {
+    font-size: 14px;
+  }
+}

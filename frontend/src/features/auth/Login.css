@@ -1,0 +1,318 @@
+/*
+  ===============================
+  LOGIN SCREEN STYLING MAP
+  This file is split into visual sections so it is easy to navigate:
+
+  1) Global color variables
+  2) Page container + two-column shell
+  3) Left panel (form)
+  4) "mi" logo block (pentagon shape)
+  5) Input fields + buttons
+  6) Right panel (banner)
+  7) Language tabs
+  8) Responsive mobile
+  ===============================
+*/
+
+:root {
+  --login-bg: #748378; 
+  --panel-light: #ffffff;
+  --text-main: #ffffff;
+  --text-dark: #4f6054;
+  --accent: #2ba68f;
+  --accent-soft: #8ebda3; 
+  --input-border: #b8c3bc; 
+}
+
+.auth-login-page {
+  min-height: 100svh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+  background: var(--login-bg); 
+  box-sizing: border-box;
+}
+
+.auth-login-shell {
+  width: min(1000px, 95%);
+  min-height: 520px;
+  display: flex;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+}
+
+.auth-login-form-panel {
+  width: 44%;
+  background: var(--panel-light);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 50px 40px;
+  box-sizing: border-box;
+}
+
+.auth-login-form {
+  width: 100%;
+  max-width: 300px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.auth-login-logo {
+  width: 120px;
+  height: 120px;
+  margin: 0 auto 30px;
+  display: grid;
+  place-items: center;
+  color: #fff;
+  font-size: 60px;
+  font-weight: 700;
+  line-height: 1;
+  background: #3e4841;
+  clip-path: polygon(10% 45%, 45% 5%, 95% 20%, 95% 85%, 45% 100%);
+}
+
+.auth-field {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  margin-top: 6px;
+}
+
+.auth-field-label {
+  position: absolute;
+  top: -8px;
+  left: 14px;
+  background: #ffffff;
+  padding: 0 5px;
+  font-size: 11px;
+  color: #79867c;
+  z-index: 2;
+}
+
+.auth-input-wrap {
+  display: flex;
+  align-items: center;
+  border: 1px solid var(--input-border);
+  border-radius: 6px;
+  background: #ffffff;
+  position: relative;
+}
+
+.auth-input-wrap:focus-within {
+  border-color: #3e4841;
+}
+
+.auth-input {
+  width: 100%;
+  border: none;
+  padding: 13px 14px;
+  font-size: 13px;
+  color: #333;
+  background: transparent;
+  outline: none;
+}
+
+.auth-password-toggle {
+  margin-right: 12px;
+  border: none;
+  background: transparent;
+  color: #88948d;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  padding: 4px;
+}
+
+.auth-forgot {
+  align-self: flex-end;
+  border: none;
+  background: none;
+  font-size: 12px;
+  color: #7ea39e;
+  text-decoration: underline;
+  cursor: pointer;
+  padding: 0;
+  margin-top: -6px; 
+}
+
+.auth-forgot-panel {
+  margin-top: 2px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.auth-forgot-title {
+  margin: 0;
+  font-size: 13px;
+  font-weight: 700;
+  color: #4d5f53;
+}
+
+.auth-forgot-hint {
+  margin: 0;
+  font-size: 11px;
+  color: #6f8075;
+}
+
+.auth-forgot-form {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.auth-forgot-actions {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+
+.auth-forgot-actions .auth-submit {
+  flex: 1;
+  margin-top: 0;
+}
+
+.auth-forgot-cancel {
+  border: 1px solid #8aa094;
+  background: transparent;
+  color: #5f7267;
+  border-radius: 999px;
+  padding: 11px 14px;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.auth-submit {
+  width: 100%;
+  margin-top: 10px;
+  border: none;
+  border-radius: 999px;
+  padding: 13px 0;
+  background: #5d7063; 
+  color: #ffffff;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  text-align: center;
+}
+
+.auth-submit:disabled {
+  cursor: not-allowed;
+  opacity: 0.7;
+}
+
+.auth-message {
+  margin: 6px 0 0;
+  font-size: 12px;
+  line-height: 1.5;
+  text-align: center;
+}
+
+.auth-message.success { color: #2f6b3e; }
+.auth-message.error { color: #934242; }
+
+.auth-login-banner {
+  flex: 1;
+  padding: 60px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center; 
+  position: relative;
+  background: linear-gradient(110deg, #249980 0%, #5E7A69 100%);
+}
+
+.auth-banner-text {
+  margin-left: 8%; 
+  color: var(--text-main);
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.auth-banner-line {
+  margin: 0;
+  font-size: 42px;
+  line-height: 1.1;
+  letter-spacing: -0.01em;
+  font-weight: 600;
+}
+
+.auth-banner-brand {
+  margin: 4px 0 0;
+  font-size: 48px;
+  line-height: 1;
+  color: var(--accent-soft);
+  font-weight: 800;
+  letter-spacing: 0.02em;
+}
+
+.auth-language-tabs {
+  position: absolute;
+  bottom: 40px;
+  right: 50px;
+  display: flex;
+  align-items: center;
+}
+
+.auth-lang-item {
+  display: inline-flex;
+  align-items: center;
+}
+
+.auth-lang-btn {
+  border: none;
+  background: transparent;
+  color: rgba(255, 255, 255, 0.7);
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  padding: 0;
+}
+
+.auth-lang-btn.active {
+  color: #ffffff;
+}
+
+.auth-lang-divider {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 8px;
+  color: rgba(255, 255, 255, 0.7);
+  font-size: 13px;
+}
+
+@media (max-width: 900px) {
+  .auth-login-shell {
+    flex-direction: column;
+  }
+  .auth-login-form-panel {
+    width: 100%;
+    order: 2;
+    padding: 40px 24px;
+  }
+  .auth-login-banner {
+    width: 100%;
+    order: 1;
+    min-height: 280px;
+    padding: 40px 24px;
+    align-items: center;
+    text-align: center;
+  }
+  .auth-banner-text {
+    margin-left: 0;
+    align-items: center;
+  }
+  .auth-language-tabs {
+    bottom: 20px;
+    right: 50%;
+    transform: translateX(50%);
+  }
+}

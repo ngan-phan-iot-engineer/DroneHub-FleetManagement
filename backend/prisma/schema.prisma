@@ -1,0 +1,111 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id        String     @id @default(cuid())
+  email     String     @unique
+  password  String
+  firstName String?
+  lastName  String?
+  role      UserRole   @default(USER)
+  isActive  Boolean    @default(true)
+  createdAt DateTime   @default(now())
+  updatedAt DateTime   @updatedAt
+
+  teams              Team[]
+  logs               Log[]
+  flights            Flight[]
+  teamMemberships    TeamMember[] @relation("teamMemberships")
+
+  @@map("users")
+}
+
+model Team {
+  id        String     @id @default(cuid())
+  name      String
+  description String?
+  userId    String
+  user      User       @relation(fields: [userId], references: [id], onDelete: Cascade)
+  createdAt DateTime   @default(now())
+  updatedAt DateTime   @updatedAt
+
+  members   TeamMember[]
+
+  @@index([userId])
+  @@map("teams")
+}
+
+model TeamMember {
+  id        String     @id @default(cuid())
+  teamId    String
+  memberId  String
+  team      Team       @relation(fields: [teamId], references: [id], onDelete: Cascade)
+  member    User       @relation("teamMemberships", fields: [memberId], references: [id], onDelete: Cascade)
+  role      TeamRole   @default(MEMBER)
+  createdAt DateTime   @default(now())
+
+  @@unique([teamId, memberId])
+  @@index([memberId])
+  @@map("team_members")
+}
+
+model Flight {
+  id            String     @id @default(cuid())
+  flightNumber  String     @unique
+  departure     String
+  arrival       String
+  departureTime DateTime
+  arrivalTime   DateTime
+  status        FlightStatus @default(SCHEDULED)
+  userId        String
+  user          User       @relation(fields: [userId], references: [id], onDelete: Cascade)
+  createdAt     DateTime   @default(now())
+  updatedAt     DateTime   @updatedAt
+
+  @@index([userId])
+  @@index([status])
+  @@map("flights")
+}
+
+model Log {
+  id        String     @id @default(cuid())
+  action    String
+  description String?
+  userId    String
+  user      User       @relation(fields: [userId], references: [id], onDelete: Cascade)
+  metadata  Json?
+  createdAt DateTime   @default(now())
+
+  @@index([userId])
+  @@index([createdAt])
+  @@map("logs")
+}
+
+enum UserRole {
+  ADMIN
+  USER
+  GUEST
+}
+
+enum TeamRole {
+  ADMIN
+  MEMBER
+  VIEWER
+}
+
+enum FlightStatus {
+  SCHEDULED
+  IN_FLIGHT
+  LANDED
+  CANCELLED
+  DELAYED
+}

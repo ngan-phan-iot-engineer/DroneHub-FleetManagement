@@ -1,0 +1,742 @@
+.drone-type-management {
+	padding: 20px;
+	height: 100%;
+	display: flex;
+	flex-direction: column;
+	overflow-y: auto;
+	background-color: #f6f9f7;
+	color: #333;
+}
+
+.drone-type-banner {
+	background-color: #64786a;
+	color: #ffffff;
+	padding: 24px;
+	border-radius: 8px;
+	margin-bottom: 24px;
+	box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+	flex-shrink: 0;
+}
+
+.drone-type-banner h1 {
+	margin: 0 0 8px 0;
+	font-size: 24px;
+	font-weight: 600;
+}
+
+.drone-type-banner p {
+	margin: 0;
+	font-size: 14px;
+	opacity: 0.9;
+}
+
+/* =========================================================
+   MISMART PREMIUM LOADING ANIMATION
+   ========================================================= */
+/* Container that centers the loading spinner to fill empty space */
+.drone-type-loading {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	height: 400px;
+	color: #64786a;
+	font-weight: 500;
+}
+
+/* 3D Spin and Pulse rhythm for the Mismart Logo */
+.drone-type-loading .spinning-logo {
+	margin-bottom: 24px;
+	/* Creates a smooth 3D flip and heartbeat pulse */
+	animation: spinAndPulse 1.5s infinite cubic-bezier(0.4, 0.0, 0.2, 1);
+	filter: drop-shadow(0 4px 8px rgba(100, 120, 106, 0.5));
+	transform-origin: center; /* Centralize axis of rotation */
+}
+
+/* Base Hexagon Color */
+.drone-type-loading .spinning-hexagon {
+	fill: #64786a;
+}
+
+/* Pulsing opacity for the "Loading data..." text */
+.drone-type-loading p {
+	color: #64786a;
+	font-weight: 600;
+	font-size: 14px;
+	letter-spacing: 1px;
+	animation: pulseText 1.5s infinite ease-in-out;
+}
+
+/* ----- KEYFRAMES / ANIMATION DEFINITIONS ----- */
+
+@keyframes spinAndPulse {
+	0% {
+		transform: scale(0.9) rotateY(0deg); /* Start flat */
+	}
+	50% {
+		transform: scale(1.15) rotateY(360deg); /* Inflate and spin 180 deg */
+	}
+	100% {
+		transform: scale(0.9) rotateY(360deg); /* Return to origin */
+	}
+}
+
+@keyframes pulseText {
+	0%, 100% { opacity: 0.4; }    /* Dim */
+	50%      { opacity: 1; }      /* Bright */
+}
+
+/* Grid layout cho các Card */
+.drone-type-grid {
+	display: grid;
+	grid-template-columns: repeat(auto-fill, minmax(360px, 1fr));
+	gap: 20px;
+	padding-bottom: 30px;
+}
+
+.drone-type-card {
+	background: #ffffff;
+	border-radius: 12px;
+	box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+	overflow: hidden;
+	display: flex;
+	flex-direction: column;
+	transition: transform 0.2s ease, box-shadow 0.2s ease;
+	border: 1px solid #e2e8e4;
+}
+
+.drone-type-card:hover {
+	transform: translateY(-4px);
+	box-shadow: 0 8px 24px rgba(100, 120, 106, 0.15);
+}
+
+.dt-card-header {
+	display: flex;
+	align-items: center;
+	padding: 16px;
+	background: #f0f4f2;
+	border-bottom: 1px solid #e2e8e4;
+}
+
+.dt-avatar-wrapper {
+	width: 60px;
+	height: 60px;
+	background: #fff;
+	border-radius: 8px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	margin-right: 16px;
+	padding: 4px;
+	box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+	border: 1px solid #e2e8e4;
+	overflow: hidden;
+	text-align: center;
+	flex-shrink: 0;
+}
+
+.dt-avatar {
+	max-width: 100%;
+	max-height: 100%;
+	object-fit: contain;
+	font-size: 10px; /* Nhỏ lại để chữ alt text nếu rớt không bị bung container */
+	color: #888;
+}
+
+.dt-title-group h2 {
+	margin: 0 0 4px 0;
+	font-size: 18px;
+	color: #2c3e32;
+	font-weight: 600;
+}
+
+.dt-manufacturer-badge {
+	display: inline-block;
+	background: #e2e8e4;
+	color: #64786a;
+	font-size: 11px;
+	padding: 3px 8px;
+	border-radius: 12px;
+	font-weight: 600;
+	text-transform: uppercase;
+}
+
+.dt-card-body {
+	padding: 16px;
+	flex-grow: 1;
+}
+
+.dt-section {
+	margin-bottom: 16px;
+	padding-bottom: 16px;
+	border-bottom: 1px dashed #e2e8e4;
+}
+
+.dt-section:last-child {
+	margin-bottom: 0;
+	padding-bottom: 0;
+	border-bottom: none;
+}
+
+.dt-section h3 {
+	font-size: 13px;
+	color: #64786a;
+	margin: 0 0 10px 0;
+	text-transform: uppercase;
+	font-weight: 700;
+	letter-spacing: 0.5px;
+	display: flex;
+	align-items: center;
+}
+
+.dt-section h3 i {
+	display: inline-block;
+	width: 16px;
+	height: 16px;
+	margin-right: 6px;
+	background-color: #8bc34a;
+	border-radius: 3px;
+}
+
+.dt-info-grid {
+	display: grid;
+	grid-template-columns: 1fr 1fr;
+	gap: 12px;
+}
+
+.dt-info-item {
+	display: flex;
+	flex-direction: column;
+	background: #f9fbf9;
+	padding: 8px 12px;
+	border-radius: 6px;
+	border: 1px solid #f0f4f2;
+}
+
+.dt-label {
+	font-size: 11px;
+	color: #888;
+	margin-bottom: 4px;
+}
+
+.dt-value {
+	font-size: 13px;
+	color: #222;
+	font-weight: 500;
+}
+
+/* Các trường highlight rủi ro / giới hạn */
+.highlight-red .dt-value { color: #d32f2f; font-weight: 600; }
+.highlight-blue .dt-value { color: #1976d2; font-weight: 600; }
+.highlight-green .dt-value { color: #388e3c; font-weight: 600; }
+
+.dt-tags-container {
+	margin-top: 8px;
+}
+
+.dt-tag-label {
+	font-size: 12px;
+	color: #666;
+	margin-bottom: 6px;
+	display: block;
+}
+
+.dt-tags {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 6px;
+}
+
+.dt-tag {
+	font-size: 11px;
+	padding: 4px 8px;
+	border-radius: 4px;
+	font-weight: 500;
+}
+
+.dt-tag-sensor {
+	background-color: #f0f4f2;
+	color: #4b5a50;
+	border: 1px solid #dbe2df;
+}
+
+.dt-tag-mission {
+	background-color: #e8f5e9;
+	color: #2e7d32;
+	border: 1px solid #c8e6c9;
+}
+
+.dt-card-footer {
+	display: flex;
+	padding: 12px 16px;
+	background: #fafcfa;
+	border-top: 1px solid #e2e8e4;
+	gap: 10px;
+}
+
+.dt-btn-edit, .dt-btn-delete {
+	flex: 1;
+	padding: 8px 0;
+	border: none;
+	border-radius: 4px;
+	font-size: 13px;
+	font-weight: 600;
+	cursor: pointer;
+	transition: all 0.2s;
+}
+
+.dt-btn-edit {
+	background: #e2e8e4;
+	color: #4b5a50;
+}
+
+.dt-btn-edit:hover {
+	background: #64786a;
+	color: white;
+}
+
+.dt-btn-delete {
+	background: transparent;
+	color: #d32f2f;
+	border: 1px solid #ffcdd2;
+}
+
+.dt-btn-delete:hover {
+	background: #ffebee;
+}
+
+/* Nút thêm mới Card */
+.dt-add-card {
+	background: transparent;
+	border: 2px dashed #b9c7bf;
+	align-items: center;
+	justify-content: center;
+	cursor: pointer;
+	box-shadow: none;
+	min-height: 400px;
+}
+
+.dt-add-card:hover {
+	background: #f0f4f2;
+	border-color: #8bc34a;
+	transform: scale(1.02);
+}
+
+.dt-add-content {
+	text-align: center;
+	padding: 30px;
+}
+
+.dt-add-icon {
+	width: 60px;
+	height: 60px;
+	background: #e2e8e4;
+	color: #64786a;
+	border-radius: 50%;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	font-size: 32px;
+	margin: 0 auto 16px;
+	transition: all 0.2s;
+}
+
+.dt-add-card:hover .dt-add-icon {
+	background: #8bc34a;
+	color: white;
+}
+
+.dt-add-content h3 {
+	margin: 0 0 8px 0;
+	color: #4b5a50;
+}
+
+.dt-add-content p {
+	margin: 0;
+	font-size: 13px;
+	color: #888;
+}
+
+/* Custom Scrollbar for the section */
+.drone-type-management::-webkit-scrollbar {
+	width: 6px;
+}
+.drone-type-management::-webkit-scrollbar-track {
+	background: transparent;
+}
+.drone-type-management::-webkit-scrollbar-thumb {
+	background-color: #b9c7bf;
+	border-radius: 10px;
+}
+
+/* =========================================================
+   UI/UX: TOAST NOTIFICATIONS
+   ========================================================= */
+.dt-toast {
+	position: fixed;
+	bottom: -40px;
+	left: 50%;
+	transform: translateX(-50%);
+	background-color: #388e3c;
+	color: white;
+	padding: 12px 24px;
+	border-radius: 20px;
+	box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+	font-weight: 500;
+	z-index: 10000;
+	opacity: 0;
+	transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+	font-size: 14px;
+}
+
+.dt-toast.active {
+	bottom: 30px;
+	opacity: 1;
+}
+
+/* =========================================================
+   UI/UX: MODAL OVERLAYS (FORM & DIALOG)
+   ========================================================= */
+.dt-modal-overlay {
+	position: fixed;
+	top: 0; left: 0; right: 0; bottom: 0;
+	background: rgba(43, 58, 48, 0.6);
+	backdrop-filter: blur(4px);
+	z-index: 2000;
+	display: flex;
+	align-items: center;
+	justify-content: flex-end; /* Ngầm định Drawer trượt từ phải */
+	animation: fadeIn 0.2s ease;
+}
+
+.dt-modal-overlay.center {
+	justify-content: center; /* Đối với Modal Xóa thì ra gữa */
+}
+
+@keyframes fadeIn {
+	from { opacity: 0; }
+	to { opacity: 1; }
+}
+
+/* =========================================================
+   UI/UX: FORM DRAWER (TẠO / SỬA)
+   ========================================================= */
+.dt-form-modal {
+	background: #ffffff;
+	width: 500px;
+	height: 100vh;
+	display: flex;
+	flex-direction: column;
+	box-shadow: -4px 0 24px rgba(0,0,0,0.1);
+	animation: slideInRight 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* Biến thể Modal nảy ra từ giữa cho chế độ Tạo Mới */
+.dt-form-modal.center-pop {
+	height: 85vh;
+	max-height: 800px;
+	border-radius: 12px;
+	animation: popIn 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+	width: 600px;
+	box-shadow: 0 12px 32px rgba(0,0,0,0.15);
+	overflow: hidden;
+}
+
+@keyframes slideInRight {
+	from { transform: translateX(100%); }
+	to { transform: translateX(0); }
+}
+
+.dt-modal-header {
+	padding: 20px 24px;
+	border-bottom: 1px solid #e2e8e4;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	background: #f9fbf9;
+}
+
+.dt-modal-header h2 {
+	margin: 0;
+	color: #2c3e32;
+	font-size: 18px;
+}
+
+.close-btn {
+	background: transparent;
+	border: none;
+	font-size: 28px;
+	color: #888;
+	cursor: pointer;
+	line-height: 1;
+	border-radius: 50%;
+	width: 32px;
+	height: 32px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	transition: background 0.2s;
+}
+
+.close-btn:hover {
+	background: #e2e8e4;
+	color: #333;
+}
+
+.dt-modal-body {
+	padding: 24px;
+	flex-grow: 1;
+	overflow-y: auto;
+}
+
+.dt-form-group-title {
+	font-size: 13px;
+	font-weight: 700;
+	color: #64786a;
+	text-transform: uppercase;
+	margin: 24px 0 12px 0;
+	padding-bottom: 8px;
+	border-bottom: 2px solid #e2e8e4;
+}
+
+.dt-form-group-title:first-child {
+	margin-top: 0;
+}
+
+.dt-form-row {
+	display: flex;
+	gap: 16px;
+	margin-bottom: 16px;
+}
+
+.dt-form-field {
+	flex: 1;
+	display: flex;
+	flex-direction: column;
+}
+
+.dt-form-field.full-width {
+	flex: 100%;
+}
+
+.dt-form-field label {
+	font-size: 12px;
+	font-weight: 600;
+	color: #4b5a50;
+	margin-bottom: 6px;
+}
+
+.dt-form-field input, .dt-form-field select {
+	padding: 10px 12px;
+	border: 1px solid #dbe2df;
+	border-radius: 6px;
+	font-size: 14px;
+	outline: none;
+	transition: border-color 0.2s, box-shadow 0.2s;
+	background: #fdfdfd;
+}
+
+.dt-form-field input:focus, .dt-form-field select:focus {
+	border-color: #8bc34a;
+	box-shadow: 0 0 0 3px rgba(139, 195, 74, 0.15);
+	background: #fff;
+}
+
+/* =========================================================
+   UI/UX: FILE UPLOAD ZONE (DRAG & DROP)
+   ========================================================= */
+.dt-file-upload-zone {
+	border: 2px dashed #dbe2df;
+	border-radius: 6px;
+	padding: 16px;
+	text-align: center;
+	background: #fdfdfd;
+	cursor: pointer;
+	transition: all 0.2s ease;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	min-height: 80px;
+}
+
+.dt-file-upload-zone:hover {
+	background: #f0f4f2;
+	border-color: #b9c7bf;
+}
+
+.dt-file-upload-zone.drag-active {
+	background: #e8f5e9;
+	border-color: #8bc34a;
+	box-shadow: inset 0 0 0 4px rgba(139, 195, 74, 0.1);
+}
+
+.dt-file-upload-zone .upload-icon {
+	font-size: 24px;
+	margin-bottom: 8px;
+	opacity: 0.7;
+}
+
+.dt-file-upload-zone span {
+	font-size: 12px;
+	color: #666;
+	line-height: 1.4;
+}
+
+.dt-file-upload-zone b {
+	color: #64786a;
+}
+
+.dt-file-preview-zone {
+	position: relative;
+	width: 100%;
+	height: 116px;
+	border: 1px solid #dbe2df;
+	border-radius: 6px;
+	overflow: hidden;
+	background: #f0f4f2;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.dt-preview-img {
+	max-width: 100%;
+	max-height: 100%;
+	object-fit: contain;
+}
+
+.btn-remove-img {
+	position: absolute;
+	bottom: 8px;
+	right: 8px;
+	background: rgba(211, 47, 47, 0.9);
+	color: white;
+	border: none;
+	padding: 4px 10px;
+	font-size: 11px;
+	font-weight: 600;
+	border-radius: 4px;
+	cursor: pointer;
+	transition: background 0.2s;
+	box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+}
+
+.btn-remove-img:hover {
+	background: #b71c1c;
+}
+
+/* =========================================================
+   UI/UX: ACTION BUTTONS (Mọi Form Modal)
+   ========================================================= */
+.dt-modal-actions {
+	padding: 16px 24px;
+	border-top: 1px solid #e2e8e4;
+	background: #f9fbf9;
+	display: flex;
+	justify-content: flex-end;
+	gap: 12px;
+}
+
+.btn-primary, .btn-cancel, .btn-danger {
+	padding: 10px 20px;
+	border-radius: 6px;
+	font-size: 14px;
+	font-weight: 600;
+	cursor: pointer;
+	border: none;
+	transition: all 0.2s;
+}
+
+.btn-primary {
+	background-color: #64786a;
+	color: white;
+}
+
+.btn-primary:hover:not(:disabled) {
+	background-color: #4b5a50;
+}
+
+.btn-primary:disabled {
+	background-color: #aebdb4;
+	cursor: not-allowed;
+}
+
+.btn-cancel {
+	background-color: transparent;
+	color: #666;
+	border: 1px solid #ccc;
+}
+
+.btn-cancel:hover:not(:disabled) {
+	background-color: #f0f0f0;
+	color: #333;
+}
+
+/* =========================================================
+   UI/UX: DELETE CONFIRMATION DIALOG 
+   ========================================================= */
+.dt-dialog-modal {
+	background: white;
+	width: 400px;
+	border-radius: 12px;
+	padding: 32px;
+	text-align: center;
+	box-shadow: 0 12px 32px rgba(0,0,0,0.15);
+	animation: popIn 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@keyframes popIn {
+	from { transform: scale(0.95); opacity: 0; }
+	to { transform: scale(1); opacity: 1; }
+}
+
+.dt-dialog-icon {
+	font-size: 48px;
+	margin-bottom: 16px;
+	line-height: 1;
+}
+
+.dt-dialog-modal h3 {
+	margin: 0 0 12px 0;
+	color: #2c3e32;
+	font-size: 20px;
+}
+
+.dt-dialog-modal p {
+	margin: 0 0 8px 0;
+	color: #555;
+	font-size: 14px;
+	line-height: 1.5;
+}
+
+.dt-warning-text {
+	color: #d32f2f !important;
+	font-weight: 600;
+	margin-bottom: 24px !important;
+}
+
+.dt-dialog-actions {
+	display: flex;
+	gap: 12px;
+	justify-content: center;
+}
+
+.dt-dialog-actions .btn-cancel {
+	flex: 1;
+}
+
+.btn-danger {
+	flex: 1;
+	background-color: #d32f2f;
+	color: white;
+}
+
+.btn-danger:hover:not(:disabled) {
+	background-color: #b71c1c;
+}
+
+.btn-danger:disabled {
+	background-color: #ef9a9a;
+	cursor: not-allowed;
+}

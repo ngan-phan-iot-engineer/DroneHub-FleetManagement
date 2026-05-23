@@ -1,0 +1,154 @@
+.device-list-panel {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 16px;
+  background: #ffffff;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  max-height: 400px;
+  overflow: hidden;
+}
+
+.device-list-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 4px;
+}
+
+.device-list-header h3 {
+  margin: 0;
+  font-size: 16px;
+  font-weight: 600;
+  color: #0f172a;
+}
+
+.device-list-count {
+  display: inline-block;
+  padding: 2px 8px;
+  background: #e0e7ff;
+  color: #4f46e5;
+  border-radius: 12px;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.device-list-filter {
+  display: flex;
+  gap: 8px;
+}
+
+.device-filter-btn {
+  padding: 6px 10px;
+  background: #e2e8f0;
+  border: 1px solid #cbd5e1;
+  border-radius: 4px;
+  font-size: 12px;
+  font-weight: 500;
+  color: #0f172a;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.device-filter-btn:hover {
+  background: #cbd5e1;
+}
+
+.device-filter-btn.is-active {
+  background: #4f46e5;
+  color: #ffffff;
+  border-color: #4f46e5;
+}
+
+.device-list-empty {
+  text-align: center;
+  color: #64748b;
+  font-size: 13px;
+  padding: 12px 0;
+  margin: 0;
+}
+
+.device-list-items {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  max-height: 300px;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.device-list-item {
+  padding: 10px 12px;
+  background: #f8fafc;
+  border: 1px solid #e2e8f0;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.device-list-item:hover {
+  background: #f1f5f9;
+  border-color: #cbd5e1;
+}
+
+.device-list-item.is-selected {
+  background: #dbeafe;
+  border-color: #0284c7;
+  box-shadow: 0 0 0 2px rgba(2, 132, 199, 0.1);
+}
+
+.device-list-item-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 6px;
+}
+
+.device-name {
+  font-size: 13px;
+  font-weight: 600;
+  color: #0f172a;
+}
+
+.device-status-badge {
+  padding: 2px 8px;
+  border-radius: 12px;
+  font-size: 11px;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.device-status-idle {
+  background: #dbeafe;
+  color: #0369a1;
+}
+
+.device-status-in_flight {
+  background: #dcfce7;
+  color: #15803d;
+}
+
+.device-status-offline {
+  background: #fee2e2;
+  color: #dc2626;
+}
+
+.device-status-dock {
+  background: #fef3c7;
+  color: #b45309;
+}
+
+.device-list-item-meta {
+  display: flex;
+  gap: 8px;
+  font-size: 12px;
+  color: #64748b;
+}
+
+.device-battery,
+.device-type {
+  display: inline-block;
+}

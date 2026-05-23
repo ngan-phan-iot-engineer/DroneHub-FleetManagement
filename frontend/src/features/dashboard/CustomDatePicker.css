@@ -1,0 +1,130 @@
+/* === OUTLINING THE POPOVER SHELL === */
+.custom-datepicker-popover {
+	position: fixed; /* fixed: luôn hiển thị trên màn hình, không bị cuộn mất */
+	margin-top: 0;
+	background: #EDEDED;
+	border-radius: 16px;
+	box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+	padding: 16px;
+	z-index: 999;
+	color: #64786a;
+}
+
+.custom-datepicker-layout {
+	display: flex;
+	gap: 20px;
+}
+
+/* === SIDEBAR PRESETS === */
+.custom-datepicker-sidebar {
+	display: flex;
+	flex-direction: column;
+	gap: 8px;
+	width: 140px;
+}
+
+.custom-datepicker-preset {
+	background: #EBEBEB;
+	border: 1px solid rgba(0,0,0,0.03);
+	color: #7b8c83;
+	padding: 10px 16px;
+	border-radius: 6px;
+	cursor: pointer;
+	font-size: 13px;
+	font-weight: 500;
+	text-align: left;
+	transition: background 0.2s, color 0.2s;
+}
+
+.custom-datepicker-preset:hover {
+	background: #dfe5e1;
+}
+
+.custom-datepicker-preset.active {
+	background: #64786a;
+	color: #ffffff;
+}
+
+/* === MAIN CALENDAR PANEL === */
+.custom-datepicker-main {
+	display: flex;
+	flex-direction: column;
+	gap: 16px;
+}
+
+/* Override react-date-range styles aggressively to match Figma mockup */
+.custom-datepicker-calendars .rdrCalendarWrapper {
+    background: transparent;
+    color: #64786a;
+}
+
+.custom-datepicker-calendars .rdrMonthAndYearWrapper {
+    height: auto;
+    padding-top: 4px;
+}
+
+.custom-datepicker-calendars .rdrMonthAndYearPickers {
+    font-weight: bold;
+    color: #506155;
+}
+
+.custom-datepicker-calendars .rdrMonth {
+    border: 1px solid #d2ded7;
+    border-radius: 6px;
+    background: #EBEBEB;
+    margin: 0 4px;
+}
+
+.custom-datepicker-calendars .rdrDayNumber span {
+    color: #7b8c83;
+}
+
+.custom-datepicker-calendars .rdrDayPassive .rdrDayNumber span {
+    color: #BDBDBD;
+}
+
+.custom-datepicker-calendars .rdrDayHovered,
+.custom-datepicker-calendars .rdrDayStartPreview, 
+.custom-datepicker-calendars .rdrDayInPreview, 
+.custom-datepicker-calendars .rdrDayEndPreview {
+    border: none;
+}
+
+/* Base custom font mapping for the date-range component */
+.custom-datepicker-calendars .rdrMonthName {
+    color: #506155;
+    font-weight: 600;
+}
+
+/* === ACTION BUTTONS === */
+.custom-datepicker-actions {
+	display: flex;
+	justify-content: flex-end;
+	gap: 8px;
+}
+
+.custom-datepicker-btn {
+	padding: 10px 24px;
+	border-radius: 6px;
+	border: none;
+	cursor: pointer;
+	font-size: 14px;
+	font-weight: 600;
+	transition: opacity 0.2s;
+}
+
+.custom-datepicker-btn:hover {
+	opacity: 0.9;
+}
+
+/* Nút Hủy bỏ */
+.btn-cancel {
+	background: #aab6b0;
+	color: #fff;
+}
+
+/* Nút Xác nhận */
+.btn-confirm {
+	background: #64786a;
+	color: #fff;
+}

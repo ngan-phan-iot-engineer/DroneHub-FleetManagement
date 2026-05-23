@@ -1,0 +1,20 @@
+/*
+  Global reset for Dronehub frontend.
+  Feature-level styles should own the screen details.
+*/
+* {
+  box-sizing: border-box;
+}
+
+html,
+body,
+#root {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  min-height: 100%;
+}
+
+body {
+  font-family: "Be Vietnam Pro", "Segoe UI", "Helvetica Neue", Arial, sans-serif;
+}

@@ -1,0 +1,217 @@
+/* Bố cục chính cho trang Fleet Management */
+.fleet-management {
+	display: flex;
+	flex-direction: column;
+	gap: 20px;
+	height: calc(100vh - 92px); /* Lấy mốc màn hình trừ đi Topbar và Padding */
+}
+
+/* KHỐI BANNER CHÍNH */
+.fleet-banner {
+	background-color: #64786a;
+	border-radius: 12px;
+	padding: 40px;
+	text-align: center;
+	box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+	margin-bottom: 10px;
+}
+
+.fleet-banner h1 {
+	margin: 0;
+	color: #ffffff;
+	font-size: 28px;
+	font-weight: 600;
+	letter-spacing: 0.5px;
+}
+
+/* KHỐI CHỨA BẢNG */
+.fleet-table-wrap {
+	background: #ffffff;
+	border-radius: 12px;
+	overflow: auto; /* Tạo thanh cuộn tự động nếu nội dung vượt quá khung */
+	box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+	flex-grow: 1; /* Điền đầy khung dọc */
+	min-height: 0; /* Quan trọng: Cho phép flex rút lại và kích hoạt thanh cuộn */
+}
+
+/* THIẾT KẾ BẢNG TABLE */
+.fleet-table {
+	width: 100%;
+	border-collapse: collapse; /* Để border hiển thị đúng cho các đường viền phụ */
+	color: #4a5e53;
+	font-size: 13px;
+	border: 1px solid #d2ded7;
+}
+
+/* KHU VỰC THEAD */
+.fleet-table thead {
+	background-color: #64786a;
+	color: #ffffff;
+	position: sticky;
+	top: 0;
+	z-index: 10; /* Tràn lên trên tbody khi lướt xuống */
+	box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.fleet-table th {
+	padding: 12px 8px;
+	font-weight: 500;
+	border: 1px solid #7c9183; /* Màu viền dọc nhạt hơn trong Header */
+	text-align: center;
+	vertical-align: middle;
+	background-color: #64786a; /* Phủ màu nền để không bị trong suốt khi trượt cắt dữ liệu */
+}
+
+/* Riêng phần tiêu đề Cột to thông tin chuyến bay không có viền bên dưới */
+.fleet-table th.group-col {
+	border-bottom: 1px solid #7c9183;
+	padding-bottom: 8px;
+}
+
+.sortable-col .sort-icon {
+	font-size: 10px;
+	margin-left: 4px;
+	opacity: 0.8;
+}
+
+.fleet-table th.sub-col {
+	padding: 10px 8px;
+	font-size: 11px;
+	background-color: #64786a; /* Cùng màu nhưng chia hàng */
+}
+
+
+/* KHU VỰC TBODY */
+.fleet-table td {
+	padding: 12px 8px;
+	border: 1px solid #d2ded7; /* Viền ô rõ rệt giống ảnh */
+	vertical-align: middle; /* Căn giữa theo chiều dọc */
+	text-align: left; /* Mặc định chữ căn trái */
+}
+
+/* Dòng trắng và dòng xám xen kẽ cho records */
+.fleet-table tbody tr {
+    background-color: #F8FAF9;
+}
+
+.fleet-table tbody tr:nth-child(even) {
+	background-color: #F0F4F1; /* Trắng xám nhạt */
+}
+
+/* CELL CỘT NGÀY (Cột Rowspan) */
+.fleet-table td.cell-date {
+	background-color: #EDEDED; /* Cột ngày nổi bật nền xám đậm hơn chút giống ảnh */
+	font-weight: 500;
+	text-align: center;
+	color: #3b4e43;
+}
+
+/* SUBTOTAL ROW (Cột Tổng Chữ cho Ghi Nợ / Tổng Phụ block) */
+.fleet-table tr.subtotal-row {
+	background-color: #E2EAE5 !important; /* Xanh xám lót riêng cho tổng phụ */
+	font-weight: 500;
+}
+
+/* Khung GRAND TOTAL */
+.fleet-table tr.grand-total-row {
+	background-color: #f0f0f0 !important;
+	font-weight: 700;
+	color: #2b3a30;
+	text-transform: uppercase;
+}
+.fleet-table tr.grand-total-row td:first-child {
+	text-align: center;
+	letter-spacing: 1px;
+}
+
+/* TIỆN ÍCH CANH LỀ CHO SỐ (Tiền tệ) */
+.text-right {
+	text-align: right !important;
+}
+.text-center {
+	text-align: center !important;
+}
+
+/* CUSTOM CHECKBOX - GIỐNG MISMART THEME */
+.custom-checkbox {
+	width: 18px;
+	height: 18px;
+	border: 2px solid #64786a;
+	border-radius: 4px;
+	margin: 0 auto;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	cursor: pointer; /* Cho tương tác tĩnh */
+	background-color: #ffffff;
+}
+
+.custom-checkbox.checked {
+	background-color: #64786a;
+}
+
+.custom-checkbox .fleet-checkmark {
+	color: #ffffff;
+	font-size: 12px;
+	line-height: 1;
+}
+
+/* =========================================================
+   HIỆU ỨNG LOADING PREMIUM "MISMART" (Chờ API)
+   ========================================================= */
+
+/* Căn giữa màn hình thay thế cho vị trí của cái Bảng */
+.fleet-loading {
+	flex-grow: 1;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	background: #ffffff;
+	border-radius: 12px;
+	box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+	min-height: 400px; /* Chống sập khung khi không có dữ liệu */
+}
+
+/* Nhịp điệu 3D Xoay của Logo Mismart */
+.spinning-logo {
+	/* Tạo hiệu ứng mượt qua không gian 3 chiều và Nhịp tim (Scale) */
+	animation: spinAndPulse 1.5s infinite cubic-bezier(0.4, 0.0, 0.2, 1);
+	filter: drop-shadow(0 4px 8px rgba(100, 120, 106, 0.5));
+	transform-origin: center; /* Đảm bảo trục xoay là rốn đa giác */
+}
+
+/* Lục giác màu Xanh Rêu */
+.spinning-hexagon {
+	fill: #64786a;
+}
+
+/* Dòng chữ chờ hiển thị (có nhịp thở Tắt - Sáng) */
+.loading-text {
+	margin-top: 24px;
+	color: #64786a;
+	font-weight: 600;
+	font-size: 14px;
+	letter-spacing: 1px;
+	animation: pulseText 1.5s infinite ease-in-out;
+}
+
+/* ----- KHUNG DIỄN HOẠT (KEYFRAMES) ----- */
+
+@keyframes spinAndPulse {
+	0% {
+		transform: scale(0.9) rotateY(0deg); /* Bắt đầu mặt phẳng */
+	}
+	50% {
+		transform: scale(1.15) rotateY(360deg); /* Phình to, xoay lật 180 độ */
+	}
+	100% {
+		transform: scale(0.9) rotateY(360deg); /* Kéo về vị trí gốc */
+	}
+}
+
+@keyframes pulseText {
+	0%, 100% { opacity: 0.4; }    /* Chờm tối */
+	50%      { opacity: 1; }      /* Sáng rực */
+}
+

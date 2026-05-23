@@ -1,0 +1,2011 @@
+/* ============================================================
+   LOG MANAGEMENT — Tab 5: Quản lý File Log
+   Tái dụng: .dashboard-filter-grid, .dashboard-filter,
+             .fleet-loading, .spinning-logo, .loading-text,
+             .text-center, .dashboard-flight-type-item
+   Chỉ định nghĩa styles đặc thù chưa có trong hệ thống
+   ============================================================ */
+
+/* ─── CONTAINER ─── */
+.log-management {
+	display: flex;
+	flex-direction: column;
+	gap: 16px;
+	/* Không set height — để .dashboard-content scroll xử lý */
+}
+
+/* ─── SEARCH INPUT WRAPPER ─── */
+.log-search-wrap {
+	display: flex;
+	align-items: center;
+	gap: 8px;
+}
+
+.log-search-wrap input {
+	flex: 1;
+	border: none;
+	background: transparent;
+	font-size: 14px;
+	color: #333;
+	outline: none;
+	padding-bottom: 4px;
+}
+
+.log-search-wrap input::placeholder {
+	color: #aab9af;
+}
+
+.log-search-icon {
+	color: #64786a;
+	display: flex;
+	align-items: center;
+	flex-shrink: 0;
+	opacity: 0.75;
+}
+
+/* ─── SUB-CONTROLS ROW ─── */
+.log-sub-controls {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	margin-top: -4px;
+}
+
+/* Nhóm 2 nút icon bên phải */
+.log-action-group {
+	display: flex;
+	gap: 8px;
+}
+
+/* Nút icon chung */
+.log-action-btn {
+	width: 36px;
+	height: 36px;
+	border: 1.5px solid #b0bbb4;
+	background: transparent;
+	border-radius: 8px;
+	cursor: pointer;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	color: #64786a;
+	transition: background 0.2s ease, border-color 0.2s ease, color 0.2s ease;
+}
+
+.log-action-btn:hover {
+	background: rgba(100, 120, 106, 0.09);
+	border-color: #64786a;
+}
+
+/* Nút đang active (đã bấm) — nền xanh đặc */
+.log-action-btn.active {
+	background: #64786a;
+	border-color: #64786a;
+	color: #ffffff;
+}
+
+/* Nút warning (⚠️) — mặc định viền + icon màu cam */
+.log-action-btn--warn {
+	border-color: #e65c00;
+	color: #e65c00;
+}
+
+.log-action-btn--warn:hover {
+	background: rgba(230, 92, 0, 0.08);
+	border-color: #e65c00;
+}
+
+.log-action-btn--warn.active {
+	background: #e65c00;
+	border-color: #e65c00;
+	color: #ffffff;
+}
+
+/* ─── WARNING DROPDOWN ─── */
+.log-warning-wrap {
+	position: relative;
+	display: inline-block;
+}
+
+.log-warning-dropdown {
+	position: absolute;
+	top: calc(100% + 8px);
+	right: 0;
+	background: #f1f4f2;
+	border: 1px solid #c2c9c5;
+	border-radius: 16px;
+	padding: 16px 20px;
+	width: max-content;
+	max-width: 95vw;
+	box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+	z-index: 999;
+	display: flex;
+	flex-direction: column;
+	gap: 12px;
+}
+
+.log-warning-update-btn {
+	align-self: flex-end;
+	background: #99ab9f;
+	color: #ffffff;
+	border: none;
+	border-radius: 8px;
+	padding: 6px 16px;
+	font-size: 13px;
+	font-weight: 500;
+	cursor: pointer;
+	transition: background 0.2s ease, transform 0.1s ease;
+}
+
+.log-warning-update-btn:hover {
+	background: #64786a;
+}
+
+.log-warning-update-btn:active {
+	background: #4a5e53;
+	transform: scale(0.97);
+}
+
+.log-warning-list {
+	display: flex;
+	flex-direction: column;
+	gap: 12px;
+	max-height: 380px;
+	overflow-y: auto;
+	padding-right: 8px;
+}
+
+.log-warning-item {
+	font-size: 13px;
+	color: #5d6e64;
+	line-height: 1.4;
+	white-space: nowrap;
+}
+
+.log-warning-item span.text-red {
+	color: #e53935;
+	font-weight: 500;
+}
+
+/* Custom scrollbar for dropdown list */
+.log-warning-list::-webkit-scrollbar {
+	width: 6px;
+}
+.log-warning-list::-webkit-scrollbar-thumb {
+	background: #c2c9c5;
+	border-radius: 4px;
+}
+.log-warning-list::-webkit-scrollbar-track {
+	background: transparent;
+}
+
+/* ─── TABLE WRAPPER ─── */
+.log-table-wrap {
+	background: #ffffff;
+	border-radius: 12px;
+	border: 1px solid #d2ded7;
+	overflow: auto;
+	box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+	flex-grow: 1;
+	min-height: 0;
+	position: relative; /* Fixed overflow hiding dropdowns */
+}
+
+/* ─── TABLE ─── */
+.log-table {
+	width: 100%;
+	border-collapse: separate; /* Required for border-radius on th */
+	border-spacing: 0;
+	font-size: 13px;
+	color: #4a5e53;
+	min-width: 980px; 
+}
+
+/* === THEAD — sticky === */
+.log-table thead {
+	position: sticky;
+	top: 0;
+	z-index: 10;
+}
+
+.log-table th {
+	padding: 14px 10px;
+	font-weight: 500;
+	font-size: 13px;
+	text-align: left;
+	white-space: nowrap;
+	border-right: 1px solid rgba(255, 255, 255, 0.12);
+	background-color: #64786a;
+	color: #ffffff;
+}
+
+.log-table th:first-child {
+	border-top-left-radius: 12px;
+}
+
+.log-table th:last-child {
+	border-right: none;
+	border-top-right-radius: 12px;
+}
+
+/* === TBODY === */
+.log-table tbody tr {
+	background-color: #ecefec;
+	transition: background 0.15s;
+}
+
+.log-table tbody tr:nth-child(even) {
+	background-color: #f7f9f7;
+}
+
+.log-table tbody tr:hover {
+	background-color: #dfe5e1;
+	cursor: default;
+}
+
+.log-table td {
+	padding: 13px 10px;
+	border-top: 1px solid #d2ded7;
+	border-right: 1px solid rgba(0, 0, 0, 0.05);
+	vertical-align: middle;
+}
+
+.log-table td:last-child {
+	border-right: none;
+}
+
+/* Empty state — không có dữ liệu */
+.log-table .log-empty {
+	text-align: center;
+	color: #aab9af;
+	padding: 48px;
+	font-style: italic;
+	font-size: 14px;
+}
+
+/* ─── STATUS DOT & DROPDOWN ─── */
+.log-status-cell {
+	position: relative;
+	display: inline-flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.log-status-btn {
+	background: none;
+	border: none;
+	padding: 4px;
+	cursor: pointer;
+	border-radius: 50%;
+	display: flex;
+}
+
+.log-status-btn:focus-visible {
+	outline: 2px solid #aab9af;
+}
+
+.log-status-dot {
+	display: block;
+	width: 16px;
+	height: 16px;
+	border-radius: 50%;
+	box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.1);
+	flex-shrink: 0;
+}
+
+.log-status-menu {
+	position: absolute;
+	top: calc(100% - 15px);
+	left: 10px;
+	background: #eeeeee; /* Nền xám nhạt như hình 2 */
+	border: 1px solid #c2c9c5;
+	border-radius: 12px;
+	padding: 6px 0;
+	min-width: 180px;
+	box-shadow: 0 6px 24px rgba(0, 0, 0, 0.22);
+	z-index: 100;
+	
+	/* Logic ẩn/hiện bằng Hover */
+	opacity: 0;
+	pointer-events: none;
+	transition: opacity 0.2s ease, transform 0.2s ease;
+	transform: translateY(-8px);
+}
+
+.log-status-cell:hover .log-status-menu {
+	opacity: 1;
+	pointer-events: auto;
+	transform: translateY(0);
+}
+
+.log-status-menu-item {
+	display: flex;
+	align-items: center;
+	gap: 14px;
+	padding: 8px 18px;
+	width: 100%;
+	border: none;
+	background: transparent;
+	text-align: left;
+	font-size: 15px;      /* Text to giống thiết kế gốc */
+	color: #64786a;
+	cursor: pointer;
+	transition: background 0.15s;
+}
+
+.log-status-menu-item:hover {
+	background: #dfe3e1;
+}
+
+/* ─── STATUS HEADER + LEGEND TOOLTIP ─── */
+.log-col-status {
+	text-align: center;
+	width: 85px;
+}
+
+.log-status-header {
+	position: relative;
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	gap: 4px;
+	cursor: default;
+	user-select: none;
+	width: 100%;
+}
+
+/* Legend box — ẩn mặc định, hiện khi hover */
+.log-legend-box {
+	position: absolute;
+	top: calc(100% + 14px);
+	left: 50%;
+	transform: translateX(-50%);
+	background: #ffffff;
+	border: 1px solid #d2ded7;
+	border-radius: 10px;
+	padding: 10px 14px;
+	min-width: 178px;
+	box-shadow: 0 8px 24px rgba(0, 0, 0, 0.13);
+	z-index: 200;
+	opacity: 0;
+	pointer-events: none;
+	transition: opacity 0.18s ease;
+	text-align: left;
+}
+
+.log-status-header:hover .log-legend-box {
+	opacity: 1;
+	pointer-events: auto;
+}
+
+/* Arrow chỉ lên trên */
+.log-legend-box::before {
+	content: '';
+	position: absolute;
+	top: -6px;
+	left: 50%;
+	transform: translateX(-50%);
+	width: 10px;
+	height: 10px;
+	background: #ffffff;
+	border-left: 1px solid #d2ded7;
+	border-top: 1px solid #d2ded7;
+	transform: translateX(-50%) rotate(45deg);
+}
+
+.log-legend-row {
+	display: flex;
+	align-items: center;
+	gap: 9px;
+	padding: 5px 0;
+	font-size: 12px;
+	color: #4a5e53;
+	border-bottom: 1px solid #f0f4f1;
+}
+
+.log-legend-row:last-child {
+	border-bottom: none;
+}
+
+.log-legend-label {
+	white-space: nowrap;
+}
+
+/* ─── FLIGHT ID COLUMN ─── */
+.log-flightid {
+	white-space: nowrap;
+}
+
+/* ─── NHÓM LỖI EXPANDABLE ─── */
+
+/* Không có lỗi */
+.log-no-error {
+	color: #aab9af;
+	font-style: italic;
+	font-size: 12px;
+}
+
+/* Wrapper inline khi có nhiều lỗi */
+.log-nhom-loi-tooltip-wrapper {
+	position: relative;
+	display: inline-flex;
+	align-items: center;
+	gap: 6px;
+	cursor: pointer;
+}
+
+.log-nhom-loi-trigger {
+	display: inline-flex;
+	align-items: center;
+	gap: 6px;
+	color: #64786a;
+}
+
+.log-chevron {
+	display: flex;
+	align-items: center;
+	color: #64786a;
+}
+
+/* Tooltip Bong bóng hiển thị đầy đủ */
+.log-tooltip-bubble {
+	position: absolute;
+	bottom: calc(100% + 10px);
+	left: 50%;
+	transform: translateX(-50%);
+	background: #f7f9f7; /* Nền xám nhạt như hình */
+	border: 1px solid #b0bbb4;
+	border-radius: 8px;
+	padding: 10px 14px;
+	min-width: 180px;
+	box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+	z-index: 200;
+	opacity: 0;
+	pointer-events: none;
+	transition: opacity 0.2s ease, transform 0.2s ease;
+	text-align: center;
+}
+
+/* Mũi tên trỏ xuống của Bong bóng */
+.log-tooltip-arrow {
+	position: absolute;
+	bottom: -7px;
+	left: 50%;
+	transform: translateX(-50%);
+	width: 14px;
+	height: 14px;
+	background: #f7f9f7;
+	border-right: 1px solid #b0bbb4;
+	border-bottom: 1px solid #b0bbb4;
+	transform: translateX(-50%) rotate(45deg);
+}
+
+.log-tooltip-content {
+	position: relative;
+	z-index: 2;
+	color: #4a5e53;
+	font-size: 13px;
+	line-height: 1.4;
+	word-wrap: break-word;
+}
+
+.log-nhom-loi-tooltip-wrapper:hover .log-tooltip-bubble {
+	opacity: 1;
+	pointer-events: auto;
+	transform: translateX(-50%) translateY(-2px);
+}
+
+/* ─── TÌNH TRẠNG BADGE ─── */
+.log-badge {
+	display: inline-block;
+	font-size: 13px;
+	font-weight: 500;
+}
+
+.log-badge--normal {
+	color: #9e9e9e;
+}
+
+.log-badge--warn {
+	color: #ff9800;
+	font-weight: 600;
+}
+
+.log-badge--error {
+	color: #f44336;
+	font-weight: 600;
+}
+
+/* ─── FLIGHT DETAIL MODAL ─── */
+.flight-detail-overlay {
+	position: fixed;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	background-color: rgba(0, 0, 0, 0.4);
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	z-index: 9999;
+	backdrop-filter: blur(2px);
+}
+
+.flight-detail-modal {
+	background-color: #f3f5f3;
+	border-radius: 16px;
+	/* Wide modal to comfortably hold 4-column detail grid */
+	width: 1100px;
+	max-width: 96vw;
+	max-height: 90vh;
+	overflow-y: auto;
+	box-shadow: 0 16px 40px rgba(0, 0, 0, 0.2);
+	position: relative;
+	border: 1px solid #d2ded7;
+	padding: 28px 36px;
+}
+
+.flight-detail-close-btn {
+	position: absolute;
+	top: 16px;
+	right: 16px;
+	background: transparent;
+	border: 1px solid #aab9af;
+	border-radius: 50%;
+	width: 24px;
+	height: 24px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	cursor: pointer;
+	color: #64786a;
+	transition: all 0.2s;
+}
+
+.flight-detail-close-btn:hover {
+	background-color: #e2e6e3;
+	color: #4a5e53;
+}
+
+.flight-detail-header {
+	display: flex;
+	justify-content: space-between;
+	align-items: flex-start;
+	margin-bottom: 24px;
+	padding-right: 24px;
+}
+
+.flight-detail-title h2 {
+	font-size: 26px;
+	color: #2d3b32; /* Darker green-gray */
+	margin: 0 0 8px 0;
+	font-weight: 700;
+}
+
+.flight-detail-title p {
+	font-size: 15px;
+	color: #3b4e43;
+	margin: 0;
+	font-weight: 600;
+}
+
+.flight-detail-summary {
+	display: grid;
+	grid-template-columns: auto auto;
+	gap: 6px 12px;
+	font-size: 14px;
+	color: #2d3b32;
+}
+
+.flight-detail-summary .label {
+	font-weight: 600;
+	color: #4a5e53;
+}
+
+.flight-detail-summary .val-red {
+	color: #d32f2f; /* Darker red */
+	font-weight: 700;
+}
+
+.flight-detail-summary .val {
+	color: #1e2b22; /* Very dark */
+	font-weight: 500;
+}
+
+.flight-detail-box-wrap {
+	position: relative;
+	margin-bottom: 24px;
+}
+
+.flight-detail-box {
+	border: 1px solid #b0bbb4;
+	border-radius: 12px;
+	/* Taller box: generous padding top/bottom for breathing room */
+	padding: 26px 24px 24px 24px;
+	position: relative;
+}
+
+.flight-detail-box-title {
+	position: absolute;
+	top: -10px;
+	left: 16px;
+	background-color: #f3f5f3;
+	padding: 0 8px;
+	font-size: 15px;
+	font-weight: 700;
+	color: #3b4e43;
+}
+
+.flight-detail-grid {
+	display: grid;
+	/* True 4-column layout: [label1] [value1] [label2] [value2]
+	   auto = label shrinks to text width; 1fr = value takes remaining space */
+	grid-template-columns: auto 1fr auto 1fr;
+	/* row-gap: space between rows; column-gap: breathing between the 4 columns */
+	gap: 18px 28px;
+	align-items: baseline;
+}
+
+/* Direct-child label inside flat 4-column grid */
+.flight-detail-grid > .label {
+	color: #4a5e53;
+	font-weight: 600;
+	font-size: 13.5px;
+	/* Never wrap label text — wrapping should only happen in value column */
+	white-space: nowrap;
+}
+
+/* Direct-child value inside flat 4-column grid */
+.flight-detail-grid > .val {
+	color: #1e2b22;
+	font-weight: 500;
+	font-size: 13.5px;
+	text-align: left;
+	word-break: break-word;
+}
+
+.flight-detail-box-actions {
+	display: flex;
+	justify-content: flex-end;
+	gap: 12px;
+	margin-top: 12px;
+}
+
+.flight-detail-btn {
+	background-color: #64786a;
+	color: #fff;
+	border: none;
+	border-radius: 6px;
+	padding: 8px 16px;
+	font-size: 13px;
+	cursor: pointer;
+	display: inline-flex;
+	align-items: center;
+	gap: 8px;
+	transition: background-color 0.2s;
+}
+
+.flight-detail-btn:hover {
+	background-color: #4a5e53;
+}
+
+.flight-detail-conclusion {
+	margin-top: 16px;
+}
+
+.flight-detail-conclusion label {
+	display: block;
+	font-size: 15px;
+	font-weight: 700;
+	color: #4a5e53;
+	margin-bottom: 8px;
+}
+
+.flight-detail-textarea {
+	width: 100%;
+	height: 100px;
+	background-color: #e5e9e6;
+	border: 1px solid #b0bbb4;
+	border-radius: 8px;
+	resize: none;
+	padding: 12px;
+	font-family: inherit; /* Kế thừa font chữ chuyên nghiệp của toàn trang */
+	font-size: 14px;
+	color: #1e2b22;
+	font-weight: 500;
+	outline: none;
+}
+
+.flight-detail-footer {
+	display: flex;
+	justify-content: center;
+	gap: 16px;
+	margin-top: 24px;
+}
+
+.flight-detail-footer-btn {
+	background-color: #64786a;
+	color: white;
+	border: none;
+	border-radius: 6px;
+	padding: 10px 24px;
+	font-size: 14px;
+	cursor: pointer;
+	display: inline-flex;
+	align-items: center;
+	gap: 8px;
+	transition: background-color 0.2s;
+}
+
+.flight-detail-footer-btn.btn-light {
+	background-color: #d2ded7;
+	color: #4a5e53;
+}
+
+.flight-detail-footer-btn:hover {
+	background-color: #4a5e53;
+	color: white;
+}
+
+.flight-detail-footer-btn.btn-light:hover {
+	background-color: #b0bbb4;
+	color: #3b4e43;
+}
+
+/* ============================================================
+   FLIGHT REPORT MODAL — Báo cáo tình trạng chuyến bay
+   z-index: 10000 để nổi trên FlightDetailModal (9999)
+   ============================================================ */
+
+/* Modal container: chiều ngang được nới rộng để layout 2 cột thở thoải mái */
+.flight-report-modal {
+	background-color: #f3f5f3;
+	border-radius: 16px;
+	width: 1200px;
+	max-width: 96vw;
+	max-height: 92vh;
+	overflow-y: auto;
+	box-shadow: 0 16px 48px rgba(0, 0, 0, 0.22);
+	position: relative;
+	border: 1px solid #d2ded7;
+	padding: 32px 44px 32px;
+}
+
+/* ─── Header ─── */
+.flight-report-header {
+	display: flex;
+	justify-content: space-between;
+	align-items: flex-start;
+	margin-bottom: 22px;
+	padding-right: 32px;
+}
+
+.flight-report-title h2 {
+	font-size: 26px;
+	font-weight: 700;
+	color: #2d3b32;
+	margin: 0 0 8px 0;
+}
+
+/* Dòng gạch xanh dưới tiêu đề */
+.flight-report-title-line {
+	width: 96px;
+	height: 3px;
+	background-color: #64786a;
+	border-radius: 2px;
+}
+
+/* Grid 2 cột: label — value cho Mã chuyến bay & Cập nhật lúc */
+.flight-report-meta {
+	display: grid;
+	grid-template-columns: auto auto;
+	gap: 4px 12px;
+	font-size: 14px;
+	text-align: left;
+}
+
+.rpt-meta-label {
+	color: #4a5e53;
+	font-weight: 600;
+	white-space: nowrap;
+}
+
+.rpt-meta-val {
+	color: #1e2b22;
+	font-weight: 500;
+}
+
+/* ─── Body: 2-column layout ─── 
+   Cột trái (thông tin + ảnh): 45%
+   Cột phải (ghi chú): 55% — rộng hơn để textarea không bị bóp */
+.flight-report-body {
+	display: grid;
+	grid-template-columns: 45fr 55fr;
+	gap: 32px;
+	margin-bottom: 24px;
+}
+
+/* ─── Cột trái ─── */
+.flight-report-left {
+	display: flex;
+	flex-direction: column;
+	gap: 20px;
+}
+
+/* Grid label-value cho thông tin người báo cáo */
+.flight-report-info-grid {
+	display: grid;
+	grid-template-columns: auto 1fr;
+	gap: 10px 16px;
+	align-items: baseline;
+	font-size: 14px;
+}
+
+.rpt-label {
+	color: #4a5e53;
+	font-weight: 500;
+	white-space: nowrap;
+}
+
+.rpt-val {
+	color: #1e2b22;
+	font-weight: 600;
+}
+
+/* ─── Phần hình ảnh ─── */
+.flight-report-images-section {
+	display: flex;
+	flex-direction: column;
+	gap: 10px;
+}
+
+/* Nhãn section: "• Hình ảnh hiện trường", "• Mô tả từ phi công" */
+.rpt-section-label {
+	font-size: 14px;
+	font-weight: 600;
+	color: #3b4e43;
+}
+
+/* Hàng hình ảnh thumbnail + nút thêm */
+.flight-report-images {
+	display: flex;
+	gap: 8px;
+	flex-wrap: wrap;
+	align-items: center;
+}
+
+.flight-report-img-thumb {
+	width: 130px;
+	height: 86px;
+	object-fit: cover;
+	border-radius: 8px;
+	border: 1.5px solid #c2cada;
+	transition: transform 0.18s ease, box-shadow 0.18s ease;
+	cursor: pointer;
+}
+
+.flight-report-img-thumb:hover {
+	transform: scale(1.04);
+	box-shadow: 0 4px 14px rgba(0, 0, 0, 0.18);
+}
+
+/* Nút dấu + để thêm ảnh mới */
+.flight-report-add-img {
+	width: 130px;
+	height: 86px;
+	border: 2px dashed #aab9af;
+	border-radius: 8px;
+	background: transparent;
+	color: #aab9af;
+	cursor: pointer;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	transition: border-color 0.18s ease, color 0.18s ease, background 0.18s ease;
+	flex-shrink: 0;
+}
+
+.flight-report-add-img:hover {
+	border-color: #64786a;
+	color: #64786a;
+	background: rgba(100, 120, 106, 0.06);
+}
+
+/* ─── Cột phải: textarea ghi chú (read-only) ─── */
+.flight-report-right {
+	display: flex;
+	flex-direction: column;
+	gap: 20px;
+}
+
+.flight-report-note-block {
+	display: flex;
+	flex-direction: column;
+	gap: 10px;
+}
+
+/* Textarea ghi chú (cột phải) — user có thể điền và sửa */
+.flight-report-note-textarea {
+	width: 100%;
+	height: 148px;
+	background-color: #e5e9e6;
+	border: 1px solid #c2c9c5;
+	border-radius: 8px;
+	padding: 14px 16px;
+	font-family: inherit;
+	font-size: 13.5px;
+	color: #4a5e53;
+	line-height: 1.6;
+	resize: none;
+	outline: none;
+	box-sizing: border-box;
+	transition: border-color 0.18s ease, box-shadow 0.18s ease;
+}
+
+.flight-report-note-textarea:focus {
+	border-color: #64786a;
+	box-shadow: 0 0 0 3px rgba(100, 120, 106, 0.15);
+}
+
+.flight-report-note-textarea::placeholder {
+	color: #aab9af;
+}
+
+/* ─── Khu vực nhập liệu phía dưới ───
+   Cột trái (Đề xuất sửa chữa): chiếm ~65%
+   Cột phải (Người viết báo cáo): chiếm ~33%
+   Khung ngoài có nền xám nhạt bao bọc cả 2 khu vực */
+.flight-report-bottom {
+	display: grid;
+	grid-template-columns: 2fr 1fr;
+	gap: 20px;
+	margin-bottom: 28px;
+	background-color: #e8eceb;
+	border-radius: 10px;
+	padding: 14px 16px 16px;
+}
+
+.flight-report-bottom-field {
+	display: flex;
+	flex-direction: column;
+	gap: 6px;
+}
+
+.flight-report-bottom-field label {
+	font-size: 14px;
+	font-weight: 600;
+	color: #4a5e53;
+}
+
+/* Textarea có thể chỉnh sửa
+   Nền trắng nhạt — nổi bật trên container xám phía sau */
+.flight-report-edit-textarea {
+	width: 100%;
+	height: 92px;
+	background-color: #f0f2f0;
+	border: 1px solid #d2d8d4;
+	border-radius: 8px;
+	padding: 12px 14px;
+	font-family: inherit;
+	font-size: 13.5px;
+	color: #1e2b22;
+	resize: none;
+	outline: none;
+	transition: border-color 0.18s ease, box-shadow 0.18s ease;
+	box-sizing: border-box;
+}
+
+.flight-report-edit-textarea:focus {
+	border-color: #64786a;
+	box-shadow: 0 0 0 3px rgba(100, 120, 106, 0.15);
+}
+
+.flight-report-edit-textarea::placeholder {
+	color: #aab9af;
+}
+
+/* ─── Footer: nút Lưu Kết Quả ─── */
+.flight-report-footer {
+	display: flex;
+	justify-content: center;
+}
+
+.flight-report-save-btn {
+	background-color: #4a5e53;
+	color: #ffffff;
+	border: none;
+	border-radius: 8px;
+	padding: 11px 48px;
+	font-size: 15px;
+	font-weight: 600;
+	cursor: pointer;
+	letter-spacing: 0.3px;
+	transition: background-color 0.2s ease, transform 0.1s ease, box-shadow 0.2s ease;
+	box-shadow: 0 4px 12px rgba(74, 94, 83, 0.35);
+}
+
+.flight-report-save-btn:hover {
+	background-color: #3a4e43;
+	box-shadow: 0 6px 18px rgba(74, 94, 83, 0.4);
+}
+
+.flight-report-save-btn:active {
+	transform: scale(0.97);
+	box-shadow: 0 2px 8px rgba(74, 94, 83, 0.3);
+}
+
+/* Custom scrollbar cho flight-report-modal */
+.flight-report-modal::-webkit-scrollbar {
+	width: 6px;
+}
+.flight-report-modal::-webkit-scrollbar-thumb {
+	background: #c2c9c5;
+	border-radius: 4px;
+}
+.flight-report-modal::-webkit-scrollbar-track {
+	background: transparent;
+}
+
+/* ============================================================
+   IMAGE LIGHTBOX — Xem ảnh phóng to khi click thumbnail
+   z-index: 11000 — cao hơn cả report modal (10000)
+   ============================================================ */
+
+/* Overlay tối bao phủ toàn màn hình */
+.img-lightbox-overlay {
+	position: fixed;
+	inset: 0;
+	background: rgba(0, 0, 0, 0.88);
+	z-index: 11000;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	animation: lightbox-fade-in 0.2s ease;
+}
+
+@keyframes lightbox-fade-in {
+	from { opacity: 0; }
+	to   { opacity: 1; }
+}
+
+/* Ảnh trung tâm — scale animation khi mở */
+.img-lightbox-img {
+	max-width: 88vw;
+	max-height: 88vh;
+	border-radius: 10px;
+	box-shadow: 0 12px 60px rgba(0, 0, 0, 0.7);
+	display: block;
+	object-fit: contain;
+	animation: lightbox-zoom-in 0.22s ease;
+	cursor: default;
+	user-select: none;
+}
+
+@keyframes lightbox-zoom-in {
+	from { transform: scale(0.92); opacity: 0; }
+	to   { transform: scale(1);    opacity: 1; }
+}
+
+/* Nút đóng × — góc trên phải overlay */
+.img-lightbox-close {
+	position: absolute;
+	top: 20px;
+	right: 24px;
+	width: 40px;
+	height: 40px;
+	background: rgba(255, 255, 255, 0.12);
+	border: 1.5px solid rgba(255, 255, 255, 0.3);
+	border-radius: 50%;
+	color: #ffffff;
+	cursor: pointer;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	transition: background 0.18s ease, transform 0.15s ease;
+}
+
+.img-lightbox-close:hover {
+	background: rgba(255, 255, 255, 0.25);
+	transform: scale(1.1);
+}
+
+/* Mũi tên điều hướng chung */
+.img-lightbox-arrow {
+	position: absolute;
+	top: 50%;
+	transform: translateY(-50%);
+	width: 52px;
+	height: 52px;
+	background: rgba(255, 255, 255, 0.12);
+	border: 1.5px solid rgba(255, 255, 255, 0.25);
+	border-radius: 50%;
+	color: #ffffff;
+	cursor: pointer;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	transition: background 0.18s ease, transform 0.15s ease;
+	z-index: 1;
+}
+
+.img-lightbox-arrow:hover {
+	background: rgba(255, 255, 255, 0.28);
+}
+
+.img-lightbox-arrow:active {
+	transform: translateY(-50%) scale(0.93);
+}
+
+/* Vị trí mũi tên trái / phải */
+.img-lightbox-arrow--left  { left:  28px; }
+.img-lightbox-arrow--right { right: 28px; }
+
+/* Chỉ số ảnh: "1 / 3" phía dưới */
+.img-lightbox-counter {
+	position: absolute;
+	bottom: 24px;
+	left: 50%;
+	transform: translateX(-50%);
+	color: rgba(255, 255, 255, 0.65);
+	font-size: 14px;
+	font-weight: 500;
+	letter-spacing: 0.5px;
+	pointer-events: none;
+	user-select: none;
+}
+
+/* ============================================================
+   FLIGHT ANALYSIS MODAL — Báo cáo & Phân tích chi tiết AI
+   ============================================================ */
+
+.flight-analysis-container {
+	width: 1240px;
+	max-width: 96vw;
+	display: flex;
+	flex-direction: column;
+	position: relative;
+}
+
+.flight-analysis-tabs {
+	display: flex;
+	z-index: 10001; 
+}
+
+.analysis-tab-btn {
+	background: #d3dbd6;
+	color: #8c9791;
+	border: none;
+	padding: 16px 48px;
+	font-size: 23px;
+	font-weight: 700;
+	cursor: pointer;
+	transition: all 0.2s;
+	position: relative;
+    top: 1px; /* Overlap border trick */
+    border-radius: 12px 12px 0 0;
+}
+
+.analysis-tab-btn:hover:not(.active) {
+    background: #c8d3cc;
+    color: #64786a;
+}
+
+.analysis-tab-btn.active {
+	background: #64786a;
+	color: #ffffff;
+}
+
+.analysis-tab-btn.disabled {
+    cursor: not-allowed;
+    pointer-events: none;
+}
+
+.flight-analysis-modal {
+	background-color: #f3f5f3;
+	border-radius: 0 16px 16px 16px;
+	width: 100%;
+	max-height: calc(92vh - 60px); 
+	overflow-y: hidden;
+	box-shadow: 0 20px 50px rgba(0, 0, 0, 0.25);
+	position: relative;
+	border: 1px solid #d2ded7;
+	display: flex;
+	flex-direction: column;
+}
+
+.flight-analysis-content-scroller {
+    padding: 32px 40px;
+    overflow-y: auto;
+    flex-grow: 1;
+}
+
+.flight-analysis-content-scroller::-webkit-scrollbar {
+	width: 8px;
+}
+.flight-analysis-content-scroller::-webkit-scrollbar-thumb {
+	background: #a0afa7;
+	border-radius: 4px;
+}
+
+.disabled-textarea {
+    background-color: #e5e9e6;
+    color: #6a746e;
+    cursor: default;
+}
+.disabled-textarea:focus {
+    box-shadow: none;
+    border-color: #c2c9c5;
+}
+
+/* ─── ANALYSIS DATA TABLE ─── */
+.analysis-table-wrap {
+    width: 100%;
+    overflow-x: auto;
+    border: 1.5px solid #64786a;
+    border-radius: 10px;
+    margin-bottom: 24px;
+}
+
+.analysis-data-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 14px;
+    color: #3b4e43;
+    min-width: 900px;
+}
+
+.analysis-data-table th {
+    background-color: #64786a;
+    color: #ffffff;
+    font-weight: 600;
+    text-align: center;
+    border: 1px solid #84968a;
+    padding: 12px 8px;
+    vertical-align: middle;
+}
+
+.sub-header-row th {
+    background-color: #728779;
+    font-weight: 500;
+    padding: 8px;
+}
+
+.analysis-data-table td {
+    border: 1px solid #c8d3cd;
+    padding: 11px 12px;
+    vertical-align: middle;
+}
+
+.analysis-data-table tbody tr {
+    background-color: #ffffff;
+}
+
+.cell-stt {
+    text-align: center;
+    font-weight: 600;
+    background-color: #eef1ef !important;
+}
+
+.cell-group {
+    font-weight: 600;
+    color: #4a5e53;
+    text-align: center;
+    background-color: #e5e9e6 !important; 
+}
+
+.cell-detail {
+    color: #4a5e53;
+}
+
+.cell-radio {
+    text-align: center;
+}
+
+.cell-radio input[type="radio"] {
+    width: 16px;
+    height: 16px;
+    accent-color: #64786a;
+    cursor: pointer;
+}
+
+.cell-status-detail {
+    color: #64786a;
+    font-weight: 500;
+}
+
+.cell-solution {
+    color: #64786a;
+}
+
+.analysis-conclusion-row td {
+    background-color: #e5e9e6 !important;
+}
+
+.cell-conclusion-label {
+    font-weight: 700;
+    text-transform: uppercase;
+    text-align: center;
+    color: #4a5e53;
+    background-color: #dce1dd !important;
+}
+
+.bold-text {
+    font-weight: 700;
+}
+
+.detailed-analysis-content {
+    line-height: 1.6;
+}
+
+.analysis-line {
+    margin-bottom: 4px;
+}
+
+/* ─── ERROR IMAGES ─── */
+.analysis-error-images-section {
+    margin-bottom: 30px;
+}
+.analysis-error-images-section label {
+    font-weight: 700;
+    font-size: 19px;
+    color: #6a746e;
+    display: block;
+    margin-bottom: 14px;
+}
+
+/* ─── BOTTOM FIELDS & ACTIONS ─── */
+.analysis-bottom-fields {
+    display: flex;
+    gap: 30px;
+    margin-bottom: 32px;
+}
+
+.analysis-bottom-left {
+    flex: 2;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.analysis-bottom-left label {
+    font-weight: 600;
+    color: #64786a;
+}
+
+.analysis-edit-textarea {
+    flex-grow: 1;
+    min-height: 100px;
+    background-color: #e9ecea;
+    border: 1px solid #d2d8d4;
+    border-radius: 8px;
+    padding: 14px;
+    font-family: inherit;
+    font-size: 14px;
+    resize: none;
+    outline: none;
+}
+.analysis-edit-textarea:focus {
+    border-color: #64786a;
+}
+
+.analysis-bottom-right {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    justify-content: flex-end;
+}
+
+.analysis-input-group {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.analysis-input-group label {
+    font-weight: 600;
+    color: #64786a;
+}
+
+.analysis-input {
+    width: 100%;
+    padding: 12px 14px;
+    border-radius: 6px;
+    border: none;
+    background-color: #e9ecea;
+    font-size: 14.5px;
+    color: #1e2b22;
+    outline: none;
+}
+.analysis-input:focus {
+    box-shadow: inset 0 0 0 1px #64786a;
+}
+
+.readonly-input {
+    background-color: #e2e6e4;
+    color: #6a746e;
+    cursor: default;
+}
+
+/* ─── FOOTER ACTIONS ─── */
+.analysis-footer-actions {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    justify-content: center; /* In image 4 it's kinda centered with "Báo lỗi" pushed to right edge? */
+}
+
+.btn-save-store {
+    background-color: #64786a;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    padding: 11px 28px;
+    font-size: 15px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.2s ease, transform 0.1s ease;
+}
+
+.btn-save-store:hover {
+    background-color: #4a5e53;
+}
+
+.btn-save-store:active {
+    transform: scale(0.97);
+}
+
+.btn-confirm {
+    background-color: #d2d8d4;
+    color: #4a5e53;
+    border: none;
+    border-radius: 6px;
+    padding: 11px 28px;
+    font-size: 15px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.2s ease, transform 0.1s ease;
+}
+
+.btn-confirm:hover {
+    background-color: #b0bbb4;
+    color: #2d3b32;
+}
+
+.btn-confirm:active {
+    transform: scale(0.97);
+}
+
+.analysis-report-radios {
+    display: flex;
+    gap: 16px;
+    margin: 0 16px;
+    align-items: center;
+}
+
+.radio-label {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 14px;
+    color: #4a5e53;
+    font-weight: 500;
+    cursor: pointer;
+}
+
+.radio-label input[type="radio"] {
+    accent-color: #64786a;
+    cursor: pointer;
+}
+
+.btn-report-error {
+    background-color: #586c5e;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    padding: 11px 24px;
+    font-size: 15px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.2s ease, transform 0.1s ease;
+}
+
+.btn-report-error:hover {
+    background-color: #3b4e43;
+}
+
+.btn-report-error:active {
+    transform: scale(0.97);
+}
+
+/* Styling cho các ô input/textarea trực tiếp trên bảng ─── */
+.analysis-data-table td.cell-input-container {
+    padding: 0;
+}
+
+.analysis-table-textarea, .detailed-analysis-textarea, .analysis-table-input {
+    width: 100%;
+    min-height: 48px;
+    height: 100%;
+    border: 1px dashed transparent;
+    background: transparent;
+    font-family: inherit;
+    font-size: inherit;
+    color: inherit;
+    padding: 11px 12px;
+    outline: none;
+    transition: all 0.2s;
+    box-sizing: border-box;
+    display: block;
+}
+
+.analysis-table-textarea, .detailed-analysis-textarea {
+    resize: none;
+}
+
+.detailed-analysis-textarea {
+    min-height: 120px;
+    line-height: 1.6;
+}
+
+.analysis-table-textarea:hover, 
+.detailed-analysis-textarea:hover,
+.analysis-table-input:hover {
+    border-color: #aab9af;
+    background: rgba(255, 255, 255, 0.5);
+}
+
+.analysis-table-textarea:focus, 
+.detailed-analysis-textarea:focus,
+.analysis-table-input:focus {
+    background: #ffffff;
+    border: 1px solid #64786a;
+    box-shadow: inset 0 0 0 1px rgba(100, 120, 106, 0.15);
+}
+
+/* ============================================================
+   AI PREDICT LOG ERROR TAB & MODAL STYLES
+   ============================================================ */
+
+/* Tab Container */
+.ai-predict-tab-container {
+    padding: 24px 40px;
+    color: #3b4e43;
+}
+
+.ai-section-title {
+    font-size: 16px;
+    font-weight: 600;
+    color: #4a5e53;
+    margin-bottom: 16px;
+    border-bottom: 1px solid #d2d8d4;
+    padding-bottom: 8px;
+    display: inline-block;
+}
+
+.ai-predict-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+}
+
+/* Cards */
+.ai-chart-card {
+    background-color: #fff;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.06);
+    cursor: pointer;
+    transition: transform 0.2s, box-shadow 0.2s;
+    display: flex;
+    flex-direction: column;
+}
+
+.ai-chart-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 12px rgba(0,0,0,0.1);
+}
+
+.ai-card-image-wrapper {
+    position: relative;
+    width: 100%;
+    height: 180px;
+    background-color: #1e1e1e;
+}
+
+.ai-card-image-wrapper img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+
+.ai-card-hover-overlay {
+    position: absolute;
+    inset: 0;
+    background-color: rgba(0,0,0,0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    transition: opacity 0.2s;
+}
+
+.ai-chart-card:hover .ai-card-hover-overlay {
+    opacity: 1;
+}
+
+.ai-explore-text {
+    color: #fff;
+    font-weight: 600;
+    font-size: 15px;
+    letter-spacing: 0.5px;
+}
+
+.ai-card-footer {
+    padding: 12px 16px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.general-footer {
+    background-color: #64786a;
+    color: white;
+    justify-content: center;
+    font-weight: 600;
+    font-size: 15px;
+}
+
+.error-footer {
+    padding: 0;
+    background-color: #d2d8d4;
+}
+
+.ai-error-name {
+    background-color: #e33d19;
+    color: white;
+    padding: 12px 24px;
+    font-weight: 600;
+    flex-shrink: 0;
+    min-width: 120px;
+    text-align: center;
+}
+
+.ai-error-time {
+    color: #4a5e53;
+    font-size: 14px;
+    padding: 0 16px;
+    flex-grow: 1;
+}
+
+.ai-predict-bottom-action {
+    display: flex;
+    justify-content: center;
+    margin-top: 32px;
+}
+
+.btn-close-ai-tab {
+    background-color: #64786a;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    padding: 10px 32px;
+    font-size: 15px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+.btn-close-ai-tab:hover {
+    background-color: #4a5e53;
+}
+
+/* ============================================================
+   AI PREDICT CHART MODAL
+   Layout: [Dark chart panel ~78%] | [White sidebar ~22%]
+   Matches MISMART telemetry viewer screenshots precisely
+   ============================================================ */
+
+/* ── Dark backdrop ── */
+.ai-predict-modal-overlay {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: rgba(0, 0, 0, 0.78);
+    padding: 20px;
+}
+
+/* ── Modal card (outer white shell) ── */
+.ai-predict-chart-modal {
+    position: relative;
+    width: 92vw;
+    max-width: 1120px;
+    height: 88vh;
+    background-color: #f0f2f1;
+    border-radius: 14px;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    box-shadow: 0 24px 72px rgba(0, 0, 0, 0.55);
+    animation: ai-modal-fadein 0.22s ease-out;
+}
+
+@keyframes ai-modal-fadein {
+    from { opacity: 0; transform: scale(0.97); }
+    to   { opacity: 1; transform: scale(1); }
+}
+
+/* ── Close button (top-right corner) ── */
+.ai-chart-close-btn {
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    z-index: 20;
+    background-color: rgba(255, 255, 255, 0.82);
+    border: none;
+    border-radius: 50%;
+    width: 28px;
+    height: 28px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    color: #555;
+    transition: background-color 0.15s, color 0.15s;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.18);
+    padding: 0;
+    flex-shrink: 0;
+}
+.ai-chart-close-btn:hover {
+    background-color: #fff;
+    color: #111;
+}
+
+/* ── Two-column content area ── */
+.ai-chart-modal-content {
+    display: flex;
+    flex: 1;
+    overflow: hidden;
+    padding: 12px;
+    gap: 12px;
+}
+
+/* ════════════════════════════════════════
+   LEFT: Dark telemetry chart panel
+   ════════════════════════════════════════ */
+.ai-chart-main-panel {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    background-color: #111111;
+    border-radius: 10px;
+    border: 1.5px solid #272727;
+}
+
+/* Colored flight-phase status bars (top strip) */
+.ai-status-bar-row {
+    display: flex;
+    height: 20px;
+    flex-shrink: 0;
+    border-radius: 8px 8px 0 0;
+    overflow: hidden;
+}
+.ai-status-seg {
+    height: 100%;
+}
+
+/* Channel info header below status bar */
+.ai-chart-header-labels {
+    display: flex;
+    gap: 18px;
+    padding: 3px 54px;
+    background-color: #0a0a0a;
+    font-size: 9.5px;
+    font-family: 'Courier New', Courier, monospace;
+    flex-shrink: 0;
+    flex-wrap: wrap;
+    border-bottom: 1px solid #1a1a1a;
+    min-height: 22px;
+    align-items: center;
+}
+
+/* Dark ECharts canvas area */
+.ai-chart-dark-canvas {
+    flex: 1;
+    min-height: 0;
+    background-color: #0d0d0d;
+    position: relative;
+}
+
+/* Image fallback (for charts without chartSeriesData) */
+.ai-chart-img-fallback {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    display: block;
+}
+
+/* ════════════════════════════════════════
+   RIGHT: White control sidebar
+   ════════════════════════════════════════ */
+.ai-chart-sidebar {
+    width: 196px;
+    flex-shrink: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    padding-top: 6px;
+    overflow: hidden;
+}
+
+/* Checkbox filter container */
+.ai-chart-filters {
+    flex: 1;
+    background-color: #e8ece9;
+    border-radius: 8px;
+    padding: 14px 12px;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    /* Firefox scrollbar */
+    scrollbar-width: thin;
+    scrollbar-color: rgba(100, 120, 106, 0.4) transparent;
+}
+.ai-chart-filters::-webkit-scrollbar { width: 4px; }
+.ai-chart-filters::-webkit-scrollbar-thumb {
+    background: rgba(100, 120, 106, 0.4);
+    border-radius: 4px;
+}
+
+/* A single filter group (parent + sub-items) */
+.ai-filter-group {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+/* Native-checkbox row */
+.ai-sidebar-check-item {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+    cursor: pointer;
+    user-select: none;
+    line-height: 1.4;
+}
+.ai-sidebar-check-item input[type="checkbox"] {
+    width: 14px;
+    height: 14px;
+    accent-color: #64786a;
+    cursor: pointer;
+    flex-shrink: 0;
+    margin: 0;
+}
+
+/* Parent (bold) filter label */
+.ai-filter-main-label {
+    font-weight: 600;
+    font-size: 13.5px;
+    color: #2d3b32;
+}
+
+/* Sub-param list (indented) */
+.ai-sidebar-sublist {
+    padding-left: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+/* Sub-param label (normal weight) */
+.ai-filter-sub-label {
+    font-size: 13px;
+    color: #586c5e;
+    font-weight: 400;
+}
+
+/* Badge + time span container */
+.ai-chart-badge-area {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    flex-shrink: 0;
+    padding-bottom: 4px;
+}
+
+/* Colored badge button */
+.ai-chart-badge {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 13px 10px;
+    border-radius: 7px;
+    font-size: 15px;
+    font-weight: 700;
+    color: #fff;
+    text-align: center;
+    letter-spacing: 0.2px;
+    cursor: default;
+    line-height: 1.2;
+}
+.ai-chart-badge.error   { background-color: #d93a00; }
+.ai-chart-badge.success { background-color: #5c7a67; }
+
+/* Time span text below badge */
+.ai-chart-time-span {
+    color: #4a5e53;
+    font-size: 13px;
+    font-weight: 500;
+    margin: 0;
+    padding-left: 4px;
+    line-height: 1.4;
+}
+
+/* ════════════════════════════════════════
+   CUSTOM CHECKBOX SYSTEM (kept for other components)
+   ════════════════════════════════════════ */
+.checkbox-container {
+    display: flex;
+    position: relative;
+    cursor: pointer;
+    align-items: center;
+    user-select: none;
+}
+.checkbox-container input {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+    height: 0;
+    width: 0;
+}
+.checkmark {
+    height: 16px;
+    width: 16px;
+    background-color: #fff;
+    border: 1px solid #aab9af;
+    border-radius: 3px;
+    margin-right: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+}
+.checkbox-container:hover input ~ .checkmark { border-color: #64786a; }
+.checkbox-container input:checked ~ .checkmark {
+    background-color: #64786a;
+    border-color: #64786a;
+}
+.checkmark:after {
+    content: "";
+    display: none;
+    width: 4px;
+    height: 8px;
+    border: solid white;
+    border-width: 0 2px 2px 0;
+    transform: rotate(45deg);
+    margin-bottom: 2px;
+}
+.checkbox-container input:checked ~ .checkmark:after { display: block; }
+
+/* Badge đếm số lượng động - Cạnh nút download */
+.log-stats-badge {
+    display: inline-flex;
+    align-items: center;
+    background-color: #EBEBEB;
+    padding: 0 16px;
+    height: 38px;
+    border-radius: 4px;
+    margin-right: 12px;
+    font-size: 14px;
+    color: #64786A;
+    font-weight: 500;
+}
+
+.log-stats-badge-val {
+    font-weight: 700;
+    color: #444;
+    margin-left: 6px;
+    font-size: 15px;
+}
