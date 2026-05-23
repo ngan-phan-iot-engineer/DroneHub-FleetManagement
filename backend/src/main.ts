@@ -46,7 +46,7 @@ async function bootstrap() {
   console.log(`📚 API Documentation: http://localhost:${port}/api/docs`);
 }
 
-bootstrap().catch((error) => {
+bootstrap().catch(error => {
   console.error('❌ Failed to start application:', error);
   process.exit(1);
 });

@@ -57,12 +57,7 @@ export class PrometheusService {
     return promClient.register.metrics();
   }
 
-  recordHttpRequest(
-    method: string,
-    route: string,
-    statusCode: number,
-    duration: number,
-  ) {
+  recordHttpRequest(method: string, route: string, statusCode: number, duration: number) {
     this.httpRequestDuration.labels(method, route, statusCode.toString()).observe(duration);
     this.httpRequestTotal.labels(method, route, statusCode.toString()).inc();
   }

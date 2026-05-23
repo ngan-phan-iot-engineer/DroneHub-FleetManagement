@@ -55,7 +55,11 @@ export class TeamsService {
     });
   }
 
-  async addMember(teamId: string, memberId: string, role: import('@prisma/client').TeamRole = 'MEMBER') {
+  async addMember(
+    teamId: string,
+    memberId: string,
+    role: import('@prisma/client').TeamRole = 'MEMBER',
+  ) {
     return this.prisma.teamMember.create({
       data: {
         teamId,

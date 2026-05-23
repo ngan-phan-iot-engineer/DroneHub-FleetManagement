@@ -11,14 +11,11 @@ export class LoggerService extends NestLogger {
     const logFormat = this.configService.get<string>('LOG_FORMAT', 'json');
     const logLevel = this.configService.get<string>('LOG_LEVEL', 'debug');
 
-    const transporters = [
+    const transporters: winston.transport[] = [
       new winston.transports.File({
         filename: 'logs/error.log',
         level: 'error',
-        format: winston.format.combine(
-          winston.format.timestamp(),
-          winston.format.json(),
-        ),
+        format: winston.format.combine(winston.format.timestamp(), winston.format.json()),
       }),
       new winston.transports.File({
         filename: 'logs/combined.log',
@@ -32,10 +29,7 @@ export class LoggerService extends NestLogger {
     if (process.env.NODE_ENV !== 'production') {
       transporters.push(
         new winston.transports.Console({
-          format: winston.format.combine(
-            winston.format.colorize(),
-            winston.format.simple(),
-          ),
+          format: winston.format.combine(winston.format.colorize(), winston.format.simple()),
         }),
       );
     }

@@ -87,11 +87,7 @@ export class AuthService {
       throw new UnauthorizedException('User account is inactive');
     }
 
-    const accessToken = this.jwtTokenService.generateAccessToken(
-      user.id,
-      user.email,
-      user.role,
-    );
+    const accessToken = this.jwtTokenService.generateAccessToken(user.id, user.email, user.role);
     const refreshToken = this.jwtTokenService.generateRefreshToken(user.id);
 
     return {
@@ -118,11 +114,7 @@ export class AuthService {
         throw new UnauthorizedException('User not found or inactive');
       }
 
-      const accessToken = this.jwtTokenService.generateAccessToken(
-        user.id,
-        user.email,
-        user.role,
-      );
+      const accessToken = this.jwtTokenService.generateAccessToken(user.id, user.email, user.role);
 
       return { accessToken };
     } catch (error) {
